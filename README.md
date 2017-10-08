@@ -1,2 +1,2 @@
-# Tervez-s-I.-II.
+# Tervezes I.-II.
 Szakdolgozat
