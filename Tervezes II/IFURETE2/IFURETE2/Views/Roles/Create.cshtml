@@ -1,0 +1,73 @@
+﻿@model IFURETE2.Models.Role
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Role</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="role" class="control-label"></label>
+                <input asp-for="role" class="form-control" />
+                <span asp-validation-for="role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="material" class="control-label"></label>
+                <input asp-for="material" class="form-control" />
+                <span asp-validation-for="material" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sites" class="control-label"></label>
+                <input asp-for="sites" class="form-control" />
+                <span asp-validation-for="sites" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="users" class="control-label"></label>
+                <input asp-for="users" class="form-control" />
+                <span asp-validation-for="users" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="recipient_ui" class="control-label"></label>
+                <input asp-for="recipient_ui" class="form-control" />
+                <span asp-validation-for="recipient_ui" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="supplier_limit" class="control-label"></label>
+                <input asp-for="supplier_limit" class="form-control" />
+                <span asp-validation-for="supplier_limit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="booking_ui" class="control-label"></label>
+                <input asp-for="booking_ui" class="form-control" />
+                <span asp-validation-for="booking_ui" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="report_ui" class="control-label"></label>
+                <input asp-for="report_ui" class="form-control" />
+                <span asp-validation-for="report_ui" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EAKER_ui" class="control-label"></label>
+                <input asp-for="EAKER_ui" class="form-control" />
+                <span asp-validation-for="EAKER_ui" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

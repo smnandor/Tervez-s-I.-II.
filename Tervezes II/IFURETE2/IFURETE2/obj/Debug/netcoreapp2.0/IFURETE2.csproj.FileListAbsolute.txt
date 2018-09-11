@@ -1,0 +1,11 @@
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\bin\Debug\netcoreapp2.0\IFURETE2.deps.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\bin\Debug\netcoreapp2.0\IFURETE2.runtimeconfig.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\bin\Debug\netcoreapp2.0\IFURETE2.runtimeconfig.dev.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\bin\Debug\netcoreapp2.0\IFURETE2.dll
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.csprojResolveAssemblyReference.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.csproj.CoreCompileInputs.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.AssemblyInfoInputs.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.AssemblyInfo.cs
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\bin\Debug\netcoreapp2.0\IFURETE2.pdb
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.dll
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE2\IFURETE2\obj\Debug\netcoreapp2.0\IFURETE2.pdb

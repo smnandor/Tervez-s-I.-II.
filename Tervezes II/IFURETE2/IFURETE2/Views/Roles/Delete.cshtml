@@ -1,0 +1,75 @@
+﻿@model IFURETE2.Models.Role
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Role</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.role)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.material)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.material)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.sites)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.sites)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.users)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.users)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.recipient_ui)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.recipient_ui)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.supplier_limit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.supplier_limit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.booking_ui)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.booking_ui)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.report_ui)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.report_ui)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EAKER_ui)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EAKER_ui)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
