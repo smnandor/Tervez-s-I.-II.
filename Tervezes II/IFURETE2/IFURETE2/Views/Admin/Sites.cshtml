@@ -6,13 +6,196 @@
 
 <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-        <li><a asp-area="" asp-controller="Admin" asp-action="Index">Felhasználók</a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="About">Telephelyek</a></li>
-        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Anyagok</a></li>
-        <li><a asp-area="" asp-controller="Booking" asp-action="Index">Szerepkörök</a></li>
+        <li><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+        <li><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+        <li><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+        <li><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
     </ul>
 </div>
 
+<input type="text" id="nameSearchInput" onkeyup="nameSearch()" placeholder="Search for names...">
+<input type="text" id="addressSearchInput" onkeyup="addressSearch()" placeholder="Search for address...">
+
+<table id="siteTable">
+    <tr class="header">
+        <th style="width:60%;">Név</th>
+        <th style="width:40%;">Cím</th>
+    </tr>
+    <tr rowIndex=1>
+        <td>Pécs</td>
+        <td>Pécs, Edison utca 1.</td>
+    </tr>
+    <tr rowIndex=2>
+        <td>Szakoly</td>
+        <td>Szakoly, Erőmű u. 43.</td>
+    </tr>
+    <tr rowIndex=3>
+        <td>Tata</td>
+        <td>Tata, Szabadság utca 2.</td>
+    </tr>
+    <tr rowIndex=4>
+        <td>Dorog</td>
+        <td>Dorog, Nyárfa utca 56.</td>
+    </tr>
+</table>
+<br />
+<input type="text" id="sitename" />
+<br />
+<input type="text" id="siteaddress" />
 
 
 
+
+<script>
+
+    document.getElementById("siteTable").addEventListener("click", tableRowSelect);
+    document.getElementById("sitename").addEventListener("change", nameChange);
+    document.getElementById("siteaddress").addEventListener("change", addressChange);
+
+    /*NAME SEARCH FIELD*/
+    function nameSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("nameSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("siteTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /*ADDRESS SEARCH FIELD*/
+    function addressSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("addressSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("siteTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /*FILTER SELECTED FOR ITEM*/
+    function tableRowSelect(event)
+    {
+        let nameInputField = document.getElementById("sitename");
+        nameInputField.value = event.target.parentElement.children[0].innerHTML;
+        nameInputField.number = event.target.parentElement.rowIndex;
+
+        let addressInputField = document.getElementById("siteaddress");
+        addressInputField.value = event.target.parentElement.children[1].innerHTML;
+        addressInputField.number = event.target.parentElement.rowIndex;
+    }
+
+    /*CHANGING NAME TD VALUE FROM INPUT FIELD VALUE*/
+    function nameChange(event)
+    {
+        var rowIndex = document.getElementById("sitename").number;
+        document
+            .getElementById("siteTable")
+            .getElementsByTagName("tr")[rowIndex]
+            .children[0]
+            .innerHTML = event.target.value;
+    }
+
+    /*CHANGING ADDRESS TD VALUE FROM INPUT FIELD VALUE*/
+    function addressChange(event)
+    {
+        var rowIndex = document.getElementById("siteaddress").number;
+        document
+            .getElementById("siteTable")
+            .getElementsByTagName("tr")[rowIndex]
+            .children[1]
+            .innerHTML = event.target.value;
+    }
+
+</script>
+
+
+
+
+<style>
+    /*TABLE DESIGN*/
+
+    #siteTable {
+        border-collapse: collapse; /* Collapse borders */
+        width: 50%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+    #siteTable th, #siteTable td {
+        text-align: left; /* Left-align text */
+        padding: 12px; /* Add padding */
+    }
+
+    #siteTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+    #siteTable tr.header, #siteTable tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
+    /*NAME SEARCHFIELD DESIGN*/
+
+    #nameSearchInput {
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 20%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    /*USERNAME SEARCHFIELD DESIGN*/
+
+    #addressSearchInput {
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 20%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+
+
+</style>

@@ -21,5 +21,15 @@ namespace IFURETE2.Controllers
         {
             return View();
         }
+
+        public IActionResult Materials()
+        {
+            return View();
+        }
+
+        public IActionResult Roles()
+        {
+            return View();
+        }
     }
 }
