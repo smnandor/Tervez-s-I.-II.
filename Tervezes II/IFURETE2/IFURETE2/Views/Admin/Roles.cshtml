@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Szerepkörök";
 }
 
-<h2>Roles</h2>
+<h2>Szerepkörök</h2>
 
 <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
@@ -13,3 +13,207 @@
         <li><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
     </ul>
 </div>
+
+<button onclick="addNewRole()">Új szerepkör</button>
+<br />
+Kereső:<br />
+<input type="text" id="roleSearchInput" onkeyup="roleSearch()" placeholder="Search for roles...">
+<br />
+Szerepkörök:<br />
+<table id="roleTable"></table>
+<br /><br /><br />
+
+Anyagok
+<select name="roles" id=0>
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br/>
+Telephelyek
+<select name="roles" id=1>
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+Felhasználók
+<select name="roles" id=2>
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+Átvevői felület
+<select name="roles" id="3">
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+Beszállítói limitek
+<select name="roles" id="4">
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+Foglalási felület
+<select name="roles" id="5">
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+Riport felület
+<select name="roles" id="6">
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+EKÁER felület
+<select name="roles" id="7">
+    <option value="1">  Nem elérhető      </option>
+    <option value="2">  Csak olvasás      </option>
+    <option value="3">  Írás és Olvasás   </option>
+</select>
+<br />
+
+<script>
+
+
+    var roleArray = new Array();
+    roleArray[0] = "Átvevő";
+    roleArray[1] = "Beszállító";
+    roleArray[2] = "Beszerző";
+    roleArray[3] = "Elszámoló";
+    roleArray[4] = "Rendszergazda";
+
+    var adminArray = new Array();
+    adminArray[0] = "1";
+    adminArray[1] = "1";
+    adminArray[2] = "2";
+    adminArray[3] = "2";
+    adminArray[4] = "2";
+    adminArray[5] = "3";
+    adminArray[6] = "3";
+    adminArray[7] = "3";
+
+
+    function dropDown()
+    {
+        for (var i = 0; i < adminArray.length; i++)
+        {
+            document.getElementById(i).value = adminArray[i];
+        }
+    }
+
+    document.getElementById(0).addEventListener("change", dropDownChange);
+    document.getElementById(1).addEventListener("change", dropDownChange);
+    document.getElementById(2).addEventListener("change", dropDownChange);
+    document.getElementById(3).addEventListener("change", dropDownChange);
+    document.getElementById(4).addEventListener("change", dropDownChange);
+    document.getElementById(5).addEventListener("change", dropDownChange);
+    document.getElementById(6).addEventListener("change", dropDownChange);
+    document.getElementById(7).addEventListener("change", dropDownChange);
+
+    function dropDownChange(event)
+    {
+        adminArray[event.target.id] = document.getElementById(event.target.id).value;
+    }
+
+
+    function addNewRole()
+    {
+        var newMaterial = prompt("Adjon meg egy új anyagot.");
+        roleArray.push(newMaterial);
+        generateRoleTable();
+    }
+
+    function generateRoleTable()
+    {
+        var tbl = document.getElementById("roleTable");
+        var tblBody = document.createElement("tbody");
+
+        for (var i = 0; i < roleArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            row.setAttribute("rowIndes", i);
+
+            var cell = document.createElement("td");
+            var cellText
+
+            cellText = document.createTextNode(roleArray[i]);
+
+
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    document.getElementById("roleSearchInput").addEventListener("change", roleSearch);
+
+    function roleSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("roleSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("roleTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[0];
+
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    generateRoleTable();
+    dropDown();
+
+</script>
+
+<style>
+    #roleTable {
+        text-align: center;
+        border-collapse: collapse; /* Collapse borders */
+        width: 20%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+        table-layout: fixed
+    }
+
+
+    #roleSearchInput, #roleName {
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 20%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+</style>
