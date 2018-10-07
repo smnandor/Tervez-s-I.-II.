@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Beszerző";
+}
+<h2>Beszerző</h2>
+
+
+Telephely:
+<select name="roles" id="selectSite"></select>
+<br />
+Beszállító:
+<select name="roles" id="selectPurveyor"></select>
+<br />
+
+Havi limit
+<input type="month" id="monthlyCalendar" />
+<br />
+Heti limit
+<input type="week" id="weeklyCalendar" />
+<br />
+Napi limit
+<input type="date" id="dailyCalendar" />
+
+
+
+
+<script>
+
+    var selectSite = document.getElementById("selectSite");
+    var selectPurveyor = document.getElementById("selectPurveyor");
+
+    var sites = ["Elso1", "Masodik1", "Harmadik1"];
+    var purveyors = ["Elso2", "Masodik2", "Harmadik2"];
+
+    //LOOPS FOR FILLING UP THE DROPDOWNS
+    for (var i = 0; i < sites.length; i++)
+    {
+        var el = document.createElement("option");
+        el.textContent = sites[i];
+        el.value = sites[i];
+        selectSite.appendChild(el);
+    }
+    for (var i = 0; i < purveyors.length; i++)
+    {
+        var el = document.createElement("option");
+        el.textContent = purveyors[i];
+        el.value = purveyors[i];
+        selectPurveyor.appendChild(el);
+    }
+
+    document.getElementById("monthlyCalendar").addEventListener("change", monthlyLimit);
+    document.getElementById("weeklyCalendar").addEventListener("change", weeklyLimit);
+    document.getElementById("dailyCalendar").addEventListener("change", dailyLimit);
+
+
+
+    function monthlyLimit()
+    {
+        var pickedMonth = document.getElementById("monthlyCalendar");
+        console.log(pickedMonth.value);
+    }
+
+    function weeklyLimit()
+    {
+        var pickedWeek = document.getElementById("weeklyCalendar");
+        console.log(pickedWeek.valueAsDate);  //valueAsDate
+
+    }
+
+    function dailyLimit()
+    {
+        var pickedDate = document.getElementById("dailyCalendar");
+        console.log(pickedDate.value);
+    }
+
+</script>
