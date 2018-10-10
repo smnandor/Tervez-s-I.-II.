@@ -3,10 +3,7 @@
     ViewData["Title"] = "Átvevő";
 }
 <h2>Átvevő</h2>
-<table id="recipientTable">
-</table>
-
-
+<table id="recipientTable"></table>
 
 Beszállító:
 <select name="roles" id="selectPurveyor"></select>
@@ -15,12 +12,13 @@ Napi limit
 <input type="date" id="dailyCalendar" />
 <br /><br />
 <table id="dailyLimitTable"></table>
-
+<br /><br />
+<table id="hourlyLimitTable"></table>
 <script>
 
     var idArray = new Array;
     idArray = ["000081", "000001", "000004", "000044"];
-    
+
     function generateRecipientTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
     {
         var thOfRecipientArray = ["Azonosító", "Beszállító", "Szállítás időpontja", "Anyag", "Lefoglalt mennyiség", "Valós mennyiség", "Műveletek"];
@@ -98,17 +96,17 @@ Napi limit
             //OPERATION
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Beérkezett"));
-            cellText.setAttribute("id", i+".1");
+            cellText.setAttribute("id", i + ".1");
             cell.appendChild(cellText);
 
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Mérlegelt"));
-            cellText.setAttribute("id", i+".2");
+            cellText.setAttribute("id", i + ".2");
             cell.appendChild(cellText);
 
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Elutasítva"));
-            cellText.setAttribute("id", i+".3");
+            cellText.setAttribute("id", i + ".3");
             cell.appendChild(cellText);
 
             row.appendChild(cell);
@@ -126,13 +124,13 @@ Napi limit
     generateRecipientTable();
 
     for (var i = 0; i < idArray.length; i++)
-        document.getElementById(i+".1").addEventListener("click", arrivedButton);
+        document.getElementById(i + ".1").addEventListener("click", arrivedButton);
 
     for (var i = 0; i < idArray.length; i++)
-        document.getElementById(i+".2").addEventListener("click", weighedButton);
+        document.getElementById(i + ".2").addEventListener("click", weighedButton);
 
     for (var i = 0; i < idArray.length; i++)
-        document.getElementById(i+".3").addEventListener("click", deniedButton);
+        document.getElementById(i + ".3").addEventListener("click", deniedButton);
 
     function arrivedButton(event)
     {
@@ -144,7 +142,7 @@ Napi limit
         else
         {
             event.target.style.backgroundColor = "#e7e7e7";
-        }   
+        }
 
     }
 
@@ -169,7 +167,7 @@ Napi limit
         {
             event.target.style.backgroundColor = "red";
         }
-        else 
+        else
         {
             event.target.style.backgroundColor = "#e7e7e7";
         }
@@ -177,7 +175,7 @@ Napi limit
     }
 
     var selectPurveyor = document.getElementById("selectPurveyor");
-    var purveyors = ["Elso2", "Masodik2", "Harmadik2"];
+    var purveyors = ["Sefag Zrt.", "Jankovicz Kft.", "Agroeuropa d.o.o", "Agrogreen Kft.", "Atiméd Kft."];
     for (var i = 0; i < purveyors.length; i++)
     {
         var el = document.createElement("option");
@@ -231,7 +229,7 @@ Napi limit
         }
         tblBody.appendChild(row);
 
-        for (var i = 0; i < thOfRecipientArray.length; i++)
+        for (var i = 0; i < purveyorArray.length; i++)
         {
             var row = document.createElement("tr");
             var cell = document.createElement("td");
@@ -246,7 +244,7 @@ Napi limit
             cellText = document.createTextNode(woodTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
-            cell = document.createElement("td");            
+            cell = document.createElement("td");
             sumOfWoodTArray += woodTArray[i];
 
             //TIME
@@ -274,25 +272,27 @@ Napi limit
             tblBody.appendChild(row);
         }
 
-        sum.push(sumOfWoodTArray)        
+        sum.push(sumOfWoodTArray)
         sum.push(sumOfHayNoArray);
         sum.push(sumOfHayTArray);
         sum.push(sumOfCutWoodTArray);
-        
+
 
         var row = document.createElement("tr");
         cellText = document.createTextNode("Összesen");
         cell.appendChild(cellText);
         row.appendChild(cell);
+        cell = document.createElement("td");
         tblBody.appendChild(row);
-        for (var i = sum.length; i >= 0 ; i--)
+        sum.reverse;
+        for (var i = 0; i < sum.length; i++)
         {
-            var cell = document.createElement("tr");
             cellText = document.createTextNode(sum[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
-            tblBody.appendChild(row);
+            cell = document.createElement("td");
         }
+
         tblBody.appendChild(row);
 
         while (tbl.firstChild)
@@ -304,10 +304,129 @@ Napi limit
     }
     dailyLimitTable();
 
+    function hourlyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfHourlyArray = ["Anyagok", "Egész nap", "6:00 - 8:00", "8:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"];
 
-    
+        var tbl = document.getElementById("hourlyLimitTable");
+        var tblBody = document.createElement("tbody");
+
+        var materialArray = new Array;
+        materialArray = ["Keményfa (t)", "Szalma (db)", "Szalma (t)"];
+
+        var sixToEightArray = new Array;
+        sixToEightArray = [0, 0, 0];
+
+        var eightToTenArray = new Array;
+        eightToTenArray = [0, 30, 3];
+
+        var tenToTwelveArray = new Array;
+        tenToTwelveArray = [0, 40, 4];
+
+        var twelveToFourteenArray = new Array;
+        twelveToFourteenArray = [0, 0, 0];
+
+        var fourteenToSixteenArray = new Array;
+        fourteenToSixteenArray = [0, 20, 2];
+
+        var sixteenToEightteenArray = new Array;
+        sixteenToEightteenArray = [0, 60, 6];
+
+        var eightteenToTwentyArray = new Array;
+        eightteenToTwentyArray = [0, 0, 0];
+
+        var dailySum = new Array;
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            dailySum[i] = 0;
+            dailySum[i] += sixToEightArray[i] + eightToTenArray[i] + tenToTwelveArray[i] + twelveToFourteenArray[i]
+                + fourteenToSixteenArray[i] + sixteenToEightteenArray[i] + eightteenToTwentyArray[i];
+        }
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfHourlyArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfHourlyArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            cellText = document.createTextNode(materialArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(dailySum[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(sixToEightArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //SUPPLIER
+            cellText = document.createTextNode(eightToTenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //TIME
+            cellText = document.createTextNode(tenToTwelveArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //MATERIAL
+            cellText = document.createTextNode(twelveToFourteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //UNIT
+            cellText = document.createTextNode(fourteenToSixteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(sixteenToEightteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(eightteenToTwentyArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+
+        tblBody.appendChild(row);
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+    hourlyLimitTable();
+
+
 </script>
-
 <style>
     table, #recipientTable {
         border-collapse: collapse; /* Collapse borders */
@@ -316,17 +435,24 @@ Napi limit
         font-size: 18px; /* Increase font-size */
     }
 
-        table, #recipientTable th, #recipientTable td {
-            text-align: left; /* Left-align text */
-            padding: 12px; /* Add padding */
-        }
+    #dailyLimitTable {
+        border-collapse: collapse; /* Collapse borders */
+        width: 60%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+    table, #recipientTable th, #recipientTable td {
+        text-align: left; /* Left-align text */
+        padding: 12px; /* Add padding */
+    }
 
         table tr, #recipientTable tr {
             /* Add a bottom border to all table rows */
             border-bottom: 1px solid #ddd;
         }
 
-            #recipientTable tr.header,  #recipientTable tr:hover {
+            #recipientTable tr.header, #recipientTable tr:hover {
                 /* Add a grey background color to the table header and on hover */
                 background-color: #f1f1f1;
             }

@@ -4,25 +4,31 @@
 }
 <h2>Beszerző</h2>
 
-
 Telephely:
 <select name="roles" id="selectSite"></select>
 <br />
 Beszállító:
 <select name="roles" id="selectPurveyor"></select>
 <br />
-
 Havi limit
 <input type="month" id="monthlyCalendar" />
-<br />
+<br /><br />
+<table id="monthlyLimitTable"></table>
+<br /><br />
+
 Heti limit
 <input type="week" id="weeklyCalendar" />
-<br />
+<br /><br />
+<table id="weeklyLimitTable"></table>
+<br /><br />
+
 Napi limit
 <input type="date" id="dailyCalendar" />
-
-
-
+<br /><br />
+<table id="dailyLimitTable"></table>
+<br /><br />
+<table id="hourlyLimitTable"></table>
+<br /><br />
 
 <script>
 
@@ -73,4 +79,492 @@ Napi limit
         console.log(pickedDate.value);
     }
 
+    function monthlyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfRecipientArray = ["Beszállító", "Keményfa (t)", "Szalma (db)", "Szalma (t)", "Fa apríték (t)"];
+
+        var tbl = document.getElementById("monthlyLimitTable");
+        var tblBody = document.createElement("tbody");
+
+        var purveyorArray = ["Sefag Zrt.", "Jankovicz Kft.", "Agroeuropa d.o.o", "Agrogreen Kft.", "Atiméd Kft."];
+
+        var woodTArray = new Array;
+        woodTArray = [0, 10, 40, 0, 0];
+        var sumOfWoodTArray = 0;
+
+        var hayNoArray = new Array;
+        hayNoArray = [100, 0, 10, 0, 0];
+        var sumOfHayNoArray = 0;
+
+        var hayTArray = new Array;
+        hayTArray = [10, 0, 1, 0, 0];
+        var sumOfHayTArray = 0;
+
+        var cutWoodTArray = new Array;
+        cutWoodTArray = [6, 60, 0, 0, 0];
+        var sumOfCutWoodTArray = 0;
+
+        var sum = new Array;
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfRecipientArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfRecipientArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < purveyorArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(purveyorArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //SUPPLIER
+            cellText = document.createTextNode(woodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfWoodTArray += woodTArray[i];
+
+            //TIME
+            cellText = document.createTextNode(hayNoArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayNoArray += hayNoArray[i];
+
+            //MATERIAL
+            cellText = document.createTextNode(hayTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayTArray += hayTArray[i];
+
+            //UNIT
+            cellText = document.createTextNode(cutWoodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfCutWoodTArray += cutWoodTArray[i];
+
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+
+        sum.push(sumOfWoodTArray)
+        sum.push(sumOfHayNoArray);
+        sum.push(sumOfHayTArray);
+        sum.push(sumOfCutWoodTArray);
+
+
+        var row = document.createElement("tr");
+        cellText = document.createTextNode("Összesen");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        cell = document.createElement("td");
+        tblBody.appendChild(row);
+        sum.reverse;
+        for (var i = 0; i < sum.length; i++)
+        {
+            cellText = document.createTextNode(sum[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+        }
+
+        tblBody.appendChild(row);
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    monthlyLimitTable();
+
+    function weeklyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfRecipientArray = ["Beszállító", "Keményfa (t)", "Szalma (db)", "Szalma (t)", "Fa apríték (t)"];
+
+        var tbl = document.getElementById("weeklyLimitTable");
+        var tblBody = document.createElement("tbody");
+
+        var purveyorArray = ["Sefag Zrt.", "Jankovicz Kft.", "Agroeuropa d.o.o", "Agrogreen Kft.", "Atiméd Kft."];
+
+        var woodTArray = new Array;
+        woodTArray = [0, 10, 40, 0, 0];
+        var sumOfWoodTArray = 0;
+
+        var hayNoArray = new Array;
+        hayNoArray = [100, 0, 10, 0, 0];
+        var sumOfHayNoArray = 0;
+
+        var hayTArray = new Array;
+        hayTArray = [10, 0, 1, 0, 0];
+        var sumOfHayTArray = 0;
+
+        var cutWoodTArray = new Array;
+        cutWoodTArray = [6, 60, 0, 0, 0];
+        var sumOfCutWoodTArray = 0;
+
+        var sum = new Array;
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfRecipientArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfRecipientArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < purveyorArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(purveyorArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //SUPPLIER
+            cellText = document.createTextNode(woodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfWoodTArray += woodTArray[i];
+
+            //TIME
+            cellText = document.createTextNode(hayNoArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayNoArray += hayNoArray[i];
+
+            //MATERIAL
+            cellText = document.createTextNode(hayTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayTArray += hayTArray[i];
+
+            //UNIT
+            cellText = document.createTextNode(cutWoodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfCutWoodTArray += cutWoodTArray[i];
+
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+
+        sum.push(sumOfWoodTArray)
+        sum.push(sumOfHayNoArray);
+        sum.push(sumOfHayTArray);
+        sum.push(sumOfCutWoodTArray);
+
+
+        var row = document.createElement("tr");
+        cellText = document.createTextNode("Összesen");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        cell = document.createElement("td");
+        tblBody.appendChild(row);
+        sum.reverse;
+        for (var i = 0; i < sum.length; i++)
+        {
+            cellText = document.createTextNode(sum[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+        }
+
+        tblBody.appendChild(row);
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    weeklyLimitTable();
+
+    function dailyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfRecipientArray = ["Beszállító", "Keményfa (t)", "Szalma (db)", "Szalma (t)", "Fa apríték (t)"];
+
+        var tbl = document.getElementById("dailyLimitTable");
+        var tblBody = document.createElement("tbody");
+
+        var purveyorArray = ["Sefag Zrt.", "Jankovicz Kft.", "Agroeuropa d.o.o", "Agrogreen Kft.", "Atiméd Kft."];
+
+        var woodTArray = new Array;
+        woodTArray = [0, 10, 40, 0, 0];
+        var sumOfWoodTArray = 0;
+
+        var hayNoArray = new Array;
+        hayNoArray = [100, 0, 10, 0, 0];
+        var sumOfHayNoArray = 0;
+
+        var hayTArray = new Array;
+        hayTArray = [10, 0, 1, 0, 0];
+        var sumOfHayTArray = 0;
+
+        var cutWoodTArray = new Array;
+        cutWoodTArray = [6, 60, 0, 0, 0];
+        var sumOfCutWoodTArray = 0;
+
+        var sum = new Array;
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfRecipientArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfRecipientArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < purveyorArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(purveyorArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //SUPPLIER
+            cellText = document.createTextNode(woodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfWoodTArray += woodTArray[i];
+
+            //TIME
+            cellText = document.createTextNode(hayNoArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayNoArray += hayNoArray[i];
+
+            //MATERIAL
+            cellText = document.createTextNode(hayTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfHayTArray += hayTArray[i];
+
+            //UNIT
+            cellText = document.createTextNode(cutWoodTArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+            sumOfCutWoodTArray += cutWoodTArray[i];
+
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+
+        sum.push(sumOfWoodTArray)
+        sum.push(sumOfHayNoArray);
+        sum.push(sumOfHayTArray);
+        sum.push(sumOfCutWoodTArray);
+
+
+        var row = document.createElement("tr");
+        cellText = document.createTextNode("Összesen");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        cell = document.createElement("td");
+        tblBody.appendChild(row);
+        sum.reverse;
+        for (var i = 0; i < sum.length; i++)
+        {
+            cellText = document.createTextNode(sum[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+        }
+
+        tblBody.appendChild(row);
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    dailyLimitTable();
+
+    function hourlyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfHourlyArray = ["Anyagok", "Egész nap", "6:00 - 8:00", "8:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"];
+
+        var tbl = document.getElementById("hourlyLimitTable");
+        var tblBody = document.createElement("tbody");
+
+        var materialArray = new Array;
+        materialArray = ["Keményfa (t)", "Szalma (db)", "Szalma (t)"];
+
+        var sixToEightArray = new Array;
+        sixToEightArray = [0, 0, 0];
+
+        var eightToTenArray = new Array;
+        eightToTenArray = [0, 30, 3];
+
+        var tenToTwelveArray = new Array;
+        tenToTwelveArray = [0, 40, 4];
+
+        var twelveToFourteenArray = new Array;
+        twelveToFourteenArray = [0, 0, 0];
+
+        var fourteenToSixteenArray = new Array;
+        fourteenToSixteenArray = [0, 20, 2];
+
+        var sixteenToEightteenArray = new Array;
+        sixteenToEightteenArray = [0, 60, 6];
+
+        var eightteenToTwentyArray = new Array;
+        eightteenToTwentyArray = [0, 0, 0];
+
+        var dailySum = new Array;
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            dailySum[i] = 0;
+            dailySum[i] += sixToEightArray[i] + eightToTenArray[i] + tenToTwelveArray[i] + twelveToFourteenArray[i]
+                + fourteenToSixteenArray[i] + sixteenToEightteenArray[i] + eightteenToTwentyArray[i];
+        }
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfHourlyArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfHourlyArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            cellText = document.createTextNode(materialArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(dailySum[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(sixToEightArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //SUPPLIER
+            cellText = document.createTextNode(eightToTenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //TIME
+            cellText = document.createTextNode(tenToTwelveArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //MATERIAL
+            cellText = document.createTextNode(twelveToFourteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //UNIT
+            cellText = document.createTextNode(fourteenToSixteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(sixteenToEightteenArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            cellText = document.createTextNode(eightteenToTwentyArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+
+        tblBody.appendChild(row);
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+    hourlyLimitTable();
+
+
 </script>
+
+<style>
+    table {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+    table, #recipientTable th, #recipientTable td {
+        text-align: left; /* Left-align text */
+        padding: 12px; /* Add padding */
+    }
+
+        table tr, #recipientTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd;
+        }
+
+            #recipientTable tr.header, #recipientTable tr:hover {
+                /* Add a grey background color to the table header and on hover */
+                background-color: #f1f1f1;
+            }
+</style>
