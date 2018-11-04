@@ -3,32 +3,43 @@
     ViewData["Title"] = "Anyagok";
 }
 
-<h2>Anyagok</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
+</ol>
 
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
-            <li><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
-        </ul>
+<div class="card">
+    <div class="card-header">
+        Anyagok
     </div>
+    <div class="card-body">    
+        <div class="container">
+            <div class="row">
+                <div class="col-3" style="width: 30px">
+                    <button  onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
+                    <input type="text" id="materialSearchInput" onkeyup="materialSearch()" placeholder="Keress anyagnévre...">                          
+                   <br />
+                    Anyag nevek:
+                    <table id="materialTable" class="table table-bordered dataTable"></table>                    
+                </div>
+                <div class="col-9">
+                    Kiválasztott elem:
+                    <br />
+                    <input type="text" id="materialName" />
+                    <table class="table table-bordered dataTable" id="shiftingTable"></table>
+                    
+                    <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                </div>
 
-<button onclick="addNewMaterial()">Új anyag</button>
-<br />
-Kereső:<br />
-<input type="text" id="materialSearchInput" onkeyup="materialSearch()" placeholder="Search for materials...">
-<br />
-Anyag nevek:<br />
-<table id="materialTable"></table>
-<br/>
-kiválasztott elem:<br />
-<input type="text" id="materialName" />
-<br /><br /><br />
-Mértékegységek és váltószámok:<br />
-<table id="shiftingTable"></table>
-Módosítások mentése:<br />
-<button onclick="submit()">Mentés</button>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
 
 <script>
 
@@ -88,7 +99,7 @@ Módosítások mentése:<br />
     document.getElementById("materialName").addEventListener("change", materialNameChange);
 
     function materialSearch()
-    {        
+    {
         // Declare variables
         var input, filter, table, tr, td, i;
         input = document.getElementById("materialSearchInput");
@@ -98,14 +109,14 @@ Módosítások mentése:<br />
 
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 0; i < tr.length; i++)
-        {            
+        {
             td = tr[i].getElementsByTagName("td")[0];
-            
+
             if (td)
-            {                
+            {
                 if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
                 {
-                    
+
                     tr[i].style.display = "";
                 }
                 else
@@ -115,6 +126,8 @@ Módosítások mentése:<br />
             }
         }
     }
+
+
 
     function tableRowSelect(event)
     {
@@ -146,50 +159,75 @@ Módosítások mentése:<br />
         var newNumber = document.createElement("INPUT");
         newNumber.setAttribute("type", "number");
         newNumber.setAttribute("id", "newNumber");
-        
-        for (var i = 0; i < unitArray.length+2; i++)
+
+        for (var i = 0; i < unitArray.length + 2; i++)
         {
             var row = document.createElement("tr");
 
             for (var j = 0; j < unitArray.length + 1; j++)
             {
-                var cell = document.createElement("td");
+
                 var cellText
-                if (i == 0 && j == 0 )              //setting first cell to be empty
+                if (i == 0 && j == 0)              //setting first cell to be empty
                 {
+                    var cell = document.createElement("td");
                     cellText = document.createTextNode("");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
-                else if (i - 1 == unitArray.length && j == 0 ) //making the bottom left cell to be an input field
+                else if (i - 1 == unitArray.length && j == 0) //making the bottom left cell to be an input field
                 {
+                    var cell = document.createElement("td");
                     cellText = newItem;
+                    cellText.setAttribute("class", "form-control");
+                    cellText.setAttribute("placeholder", "Mértékegység");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
-                else if ( i - 1 == unitArray.length && j == 1) // creating the new number input field
+                else if (i - 1 == unitArray.length && j == 1) // creating the new number input field
                 {
+                    var cell = document.createElement("td");
                     cellText = newNumber;
+                    cellText.setAttribute("class", "form-control");
+                    cellText.setAttribute("placeholder", "Váltószám");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
                 else if (i == 0 && j > 0)       //filling the first row
                 {
-                    cellText = document.createTextNode(unitArray[j - 1] );
+                    var cell = document.createElement("th");
+                    cellText = document.createTextNode(unitArray[j - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
                 else if (i > 0 && j == 0)       //filling the first collumn
                 {
+                    var cell = document.createElement("th");
                     cellText = document.createTextNode(unitArray[i - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
                 else if (i > unitArray.length || j > unitArray.length) // making the last row blank
                 {
+                    var cell = document.createElement("td");
                     cellText = document.createTextNode("");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
                 else if (j == 1) // filling the second collumn with the given numbers
                 {
-                    cellText = document.createTextNode(numberArray[i - 1 ]);
+                    var cell = document.createElement("td");
+                    cellText = document.createTextNode(numberArray[i - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
                 else    //calculating
                 {
+                    var cell = document.createElement("td");
                     cellText = document.createTextNode((numberArray[i - 1] / numberArray[j - 1]));
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
                 }
-                
-                cell.appendChild(cellText);
-                row.appendChild(cell);
             }
             tblBody.appendChild(row);
         }
@@ -211,7 +249,7 @@ Módosítások mentése:<br />
             unitArray.push(newItem);
             numberArray.push(newNumber);
         }
-        else 
+        else
         {
             alert("Adjon meg egy új egységet és egy váltószámot ami nagyobb mint 0");
         }
@@ -222,42 +260,39 @@ Módosítások mentése:<br />
     generateMaterialTable();
     generateShiftingTable();
 
-</script> 
+</script>
 
 <style>
     #materialTable {
         text-align: center;
         border-collapse: collapse; /* Collapse borders */
-        width: 20%; /* Full-width */
+        width: 60%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
-        
-        table-layout: fixed
+        table-layout: fixed;       
     }
-    
+
     #shiftingTable {
         text-align: center;
         border-collapse: collapse; /* Collapse borders */
-        width: 80%; /* Full-width */
+        width: 100%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
-       
         table-layout: fixed
     }
 
-    input {
+    .form-control {
         width: 100%;
+        box-sizing: border-box;
+    
+        }
+
+    input{
+        width: 200px;
     }
 
-    #materialSearchInput, #materialName {
-        background-position: 10px 12px; /* Position the search icon */
-        background-repeat: no-repeat; /* Do not repeat the icon image */
-        width: 20%; /* Full-width */
-        font-size: 16px; /* Increase font-size */
-        padding: 12px 20px 12px 40px; /* Add some padding */
-        border: 1px solid #ddd; /* Add a grey border */
-        margin-bottom: 12px; /* Add some space below the input */
+    button{
+        margin-bottom: 10px;
+        
     }
-
-
 </style>

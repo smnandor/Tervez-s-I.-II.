@@ -13,6 +13,8 @@ namespace IFURETE2.Models
         [StringLength(25, MinimumLength = 6)]
         public string name { get; set; }
         [StringLength(25, MinimumLength = 6)]
+        public string password { get; set; }
+        [StringLength(25, MinimumLength = 6)]
         public string username { get; set; }
         public int phone_number { get; set; }
         [StringLength(60, MinimumLength = 3)]
