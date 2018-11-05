@@ -2,44 +2,39 @@
 @{
     ViewData["Title"] = "Anyagok";
 }
-
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
 </ol>
-
 <div class="card">
     <div class="card-header">
         Anyagok
     </div>
-    <div class="card-body">    
+    <div class="card-body">
         <div class="container">
             <div class="row">
                 <div class="col-3" style="width: 30px">
-                    <button  onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
-                    <input type="text" id="materialSearchInput" onkeyup="materialSearch()" placeholder="Keress anyagnévre...">                          
-                   <br />
+                    <button onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
+                    <input type="text" id="materialSearchInput" onkeyup="materialSearch()" class="form-control" placeholder="Keress anyagnévre...">
+                    <br />
                     Anyag nevek:
-                    <table id="materialTable" class="table table-bordered dataTable"></table>                    
+                    <table id="materialTable" class="table table-bordered dataTable"></table>
                 </div>
                 <div class="col-9">
                     Kiválasztott elem:
                     <br />
-                    <input type="text" id="materialName" />
+                    <input type="text" id="materialName" class="form-control" />
                     <table class="table table-bordered dataTable" id="shiftingTable"></table>
-                    
+
                     <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
                 </div>
-
             </div>
         </div>
-    
+
     </div>
 </div>
-
-
 
 <script>
 
@@ -74,7 +69,7 @@
         for (var i = 0; i < materialArray.length; i++)
         {
             var row = document.createElement("tr");
-            row.setAttribute("rowIndes", i);
+            row.setAttribute("rowIndex", i);
 
             var cell = document.createElement("td");
             var cellText
@@ -261,7 +256,6 @@
     generateShiftingTable();
 
 </script>
-
 <style>
     #materialTable {
         text-align: center;
@@ -269,7 +263,7 @@
         width: 60%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
-        table-layout: fixed;       
+        table-layout: fixed;
     }
 
     #shiftingTable {
@@ -284,15 +278,13 @@
     .form-control {
         width: 100%;
         box-sizing: border-box;
-    
-        }
+    }
 
-    input{
+    #materialName, #materialSearchInput {
         width: 200px;
     }
 
-    button{
+    button {
         margin-bottom: 10px;
-        
     }
 </style>

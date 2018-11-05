@@ -2,23 +2,21 @@
 @{
     ViewData["Title"] = "Felhaszánlók";
 }
-
-
-
-<h2>Felhasználók</h2>
-<div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-        <li><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
-    </ul>
-</div> 
-<br /> <br />
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        Felhasználók
+    </div>
+</div>
 
 <input type="text" id="nameSearchInput" onkeyup="nameSearch()" placeholder="Search for names...">
 <input type="text" id="usernameSearchInput" onkeyup="usernameSearch()" placeholder="Search for username...">
-  
+
 <form id="roleInputForm">
     <select name="roles" id="roleInput">
         <option value="all">            Összes          </option>
@@ -30,40 +28,36 @@
     </select>
 </form>
 
-
-
 <table id="userTable">
     <tr class="header">
         <th style="width:60%;">Név</th>
         <th style="width:40%;">Felhasználónév</th>
         <th style="width:40%;">Szerepkör</th>
     </tr>
-    <tr rowIndex = 1>
+    <tr rowIndex=1>
         <td>Alfred</td>
         <td>Alf</td>
         <td>Rendszergazda</td>
     </tr>
-    <tr rowIndex = 2>
+    <tr rowIndex=2>
         <td>Balázs</td>
         <td>Bzs</td>
         <td>Beszállító</td>
     </tr>
-    <tr rowIndex =3>
+    <tr rowIndex=3>
         <td>István</td>
         <td>Isti</td>
         <td>Beszállító</td>
     </tr>
-    <tr rowIndex =4>
+    <tr rowIndex=4>
         <td>Koppány</td>
         <td>Kopi</td>
         <td>Elszámoló</td>
     </tr>
 </table>
-
 <p id="username"></p>
 <p id="name"></p>
 <p id="role"></p>
-
 
 <script>
 
@@ -84,7 +78,7 @@
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 0; i < tr.length; i++)
         {
-            td = tr[i].getElementsByTagName("td")[0];            
+            td = tr[i].getElementsByTagName("td")[0];
             if (td)
             {
                 if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
@@ -124,7 +118,7 @@
                 }
             }
         }
-    } 
+    }
 
     function roleSearch()
     {
@@ -180,14 +174,10 @@
 
 </script>
 
-
-
 <style>
-
     /*TABLE DESIGN*/
 
-    #userTable 
-    {
+    #userTable {
         border-collapse: collapse; /* Collapse borders */
         width: 50%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
@@ -199,21 +189,19 @@
             padding: 12px; /* Add padding */
         }
 
-    #userTable tr 
-    {
-        /* Add a bottom border to all table rows */
-        border-bottom: 1px solid #ddd;
-    }
-
-        #userTable tr.header, #userTable tr:hover {
-            /* Add a grey background color to the table header and on hover */
-            background-color: #f1f1f1;
+        #userTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd;
         }
+
+            #userTable tr.header, #userTable tr:hover {
+                /* Add a grey background color to the table header and on hover */
+                background-color: #f1f1f1;
+            }
 
     /*NAME SEARCHFIELD DESIGN*/
 
-    #nameSearchInput 
-    {
+    #nameSearchInput {
         background-position: 10px 12px; /* Position the search icon */
         background-repeat: no-repeat; /* Do not repeat the icon image */
         width: 20%; /* Full-width */
@@ -225,8 +213,7 @@
 
     /*USERNAME SEARCHFIELD DESIGN*/
 
-    #usernameSearchInput 
-    {
+    #usernameSearchInput {
         background-position: 10px 12px; /* Position the search icon */
         background-repeat: no-repeat; /* Do not repeat the icon image */
         width: 20%; /* Full-width */
@@ -238,8 +225,7 @@
 
     /*  DROPDOWN SEARCH DESIGN */
 
-    #roleInput
-    {
+    #roleInput {
         background-position: 14px 12px;
         background-repeat: no-repeat;
         font-size: 16px;
@@ -247,8 +233,4 @@
         border: none;
         border-bottom: 1px solid #ddd;
     }
-
 </style>
-
-
-

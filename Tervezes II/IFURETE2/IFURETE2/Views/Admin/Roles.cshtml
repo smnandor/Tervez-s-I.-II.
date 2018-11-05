@@ -2,16 +2,16 @@
 @{
     ViewData["Title"] = "Szerepkörök";
 }
-
-<h2>Szerepkörök</h2>
-
-<div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-        <li><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
-        <li><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
-    </ul>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        Szerepkörök
+    </div>
 </div>
 
 <button onclick="addNewRole()">Új szerepkör</button>
@@ -22,14 +22,13 @@ Kereső:<br />
 Szerepkörök:<br />
 <table id="roleTable"></table>
 <br /><br /><br />
-
 Anyagok
 <select name="roles" id=0>
     <option value="1">  Nem elérhető      </option>
     <option value="2">  Csak olvasás      </option>
     <option value="3">  Írás és Olvasás   </option>
 </select>
-<br/>
+<br />
 Telephelyek
 <select name="roles" id=1>
     <option value="1">  Nem elérhető      </option>
@@ -79,9 +78,7 @@ EKÁER felület
     <option value="3">  Írás és Olvasás   </option>
 </select>
 <br />
-
 <script>
-
 
     var roleArray = new Array();
     roleArray[0] = "Átvevő";
@@ -194,7 +191,6 @@ EKÁER felület
     dropDown();
 
 </script>
-
 <style>
     #roleTable {
         text-align: center;
@@ -215,5 +211,4 @@ EKÁER felület
         border: 1px solid #ddd; /* Add a grey border */
         margin-bottom: 12px; /* Add some space below the input */
     }
-
 </style>
