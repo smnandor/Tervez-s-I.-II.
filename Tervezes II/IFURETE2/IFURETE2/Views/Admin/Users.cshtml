@@ -12,59 +12,176 @@
     <div class="card-header">
         Felhasználók
     </div>
+<div class="card-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-6" style="width: 30px">
+                <div class="row">
+                    <div class="col-4" style="width: 30px">
+                        <input type="text" id="nameSearchInput" onkeyup="nameSearch()" placeholder="Keresés névre..." class="form-control">
+                    </div>
+                    <div class="col-4" style="width: 30px">
+                        <input type="text" id="usernameSearchInput" onkeyup="usernameSearch()" placeholder="Keresés f.névre..." class="form-control">
+                    </div>
+                    <div class="col-4" style="width: 30px">
+                        <form id="roleInputForm">
+                            <select name="roles" id="roleInput" class="custom-select">
+                                <option value="all">            Összes          </option>
+                                <option value="átvevő">         Átvevő          </option>
+                                <option value="beszállító">     Beszállító      </option>
+                                <option value="beszerző">       Beszerző        </option>
+                                <option value="elszámoló">      Elszámoló       </option>
+                                <option value="rendszergazda">  Rendszergazda   </option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <table id="userTable" class="table table-bordered"></table>
+            </div>
+            <div class="col-6">
+
+                <div float="left">Felhasználói beállítások:</div>
+                <b id="username">-</b>
+                <div class="row">
+                    <div class="col-4" style="width: 30px">
+                        <br />
+                        Név:
+                        <br /> <br />
+                        E-mail cím:
+                        <br /> <br />
+                        Telefonszám:
+                        <br /> <br />
+
+                    </div>
+                    <div class="col-8" style="width: 30px">
+                        <input type="text" id="name" placeholder="Név" class="form-control" />
+                        <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
+                        <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
+                    </div>
+                    <fieldset id="checkboxes"></fieldset>
+                </div>
+                <button id="registrationConfrimation" onclick="submit()" class="btn btn-primary">Regisztráció megerősítése</button>
+                <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
-<input type="text" id="nameSearchInput" onkeyup="nameSearch()" placeholder="Search for names...">
-<input type="text" id="usernameSearchInput" onkeyup="usernameSearch()" placeholder="Search for username...">
-
-<form id="roleInputForm">
-    <select name="roles" id="roleInput">
-        <option value="all">            Összes          </option>
-        <option value="átvevő">         Átvevő          </option>
-        <option value="beszállító">     Beszállító      </option>
-        <option value="beszerző">       Beszerző        </option>
-        <option value="elszámoló">      Elszámoló       </option>
-        <option value="rendszergazda">  Rendszergazda   </option>
-    </select>
-</form>
-
-<table id="userTable">
-    <tr class="header">
-        <th style="width:60%;">Név</th>
-        <th style="width:40%;">Felhasználónév</th>
-        <th style="width:40%;">Szerepkör</th>
-    </tr>
-    <tr rowIndex=1>
-        <td>Alfred</td>
-        <td>Alf</td>
-        <td>Rendszergazda</td>
-    </tr>
-    <tr rowIndex=2>
-        <td>Balázs</td>
-        <td>Bzs</td>
-        <td>Beszállító</td>
-    </tr>
-    <tr rowIndex=3>
-        <td>István</td>
-        <td>Isti</td>
-        <td>Beszállító</td>
-    </tr>
-    <tr rowIndex=4>
-        <td>Koppány</td>
-        <td>Kopi</td>
-        <td>Elszámoló</td>
-    </tr>
-</table>
-<p id="username"></p>
-<p id="name"></p>
-<p id="role"></p>
 
 <script>
+    var nameArray = new Array();
+    nameArray[0] = "Kovács István";
+    nameArray[1] = "Kiss Károly";
+    nameArray[2] = "Gallai Péter";
+    nameArray[3] = "Szántó Áron";
+    nameArray[4] = "Magnusz Mario";
+    nameArray[5] = "Lenti Ákos";
+
+
+    var usernameArray = new Array();
+    usernameArray[0] = "kovacs2";
+    usernameArray[1] = "Karoly34";
+    usernameArray[2] = "gallaip";
+    usernameArray[3] = "szanto.aron";
+    usernameArray[4] = "Magnusz.Mario";
+    usernameArray[5] = "lentia";
+
+    var roleArray = new Array();
+    roleArray[0] = "Beszerző";
+    roleArray[1] = "Beszállító";
+    roleArray[2] = "Elszámoló";
+    roleArray[3] = "Átvevő";
+    roleArray[4] = "Rendszergazda";
+    roleArray[5] = "Átvevő";
 
     //Dropdown menu search
     document.getElementById("roleInput").addEventListener("change", roleSearch);
     //On row click search
     document.getElementById("userTable").addEventListener("click", tableRowSelect);
+
+    function generateUserTable()
+    {
+        var tbl = document.getElementById("userTable");
+        var tblBody = document.createElement("tbody");
+        var row = document.createElement("tr");
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("Név");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("Felhasználónév");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("Szerepkör");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        tblBody.appendChild(row);
+
+
+        for (var i = 0; i < nameArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            row.setAttribute("rowIndex", i);
+
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(nameArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(usernameArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(roleArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+            tblBody.appendChild(row);
+        }
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+    generateUserTable();
+
+    var everyRoleArray = new Array();
+    everyRoleArray[0] = "Beszerző";
+    everyRoleArray[1] = "Átvevő";
+    everyRoleArray[2] = "Beszállító";
+    everyRoleArray[3] = "Elszámoló";
+    everyRoleArray[4] = "Rendszergazda";
+
+    var bannedFrom = "2018/08/02";
+    var bannednTo = "2018/08/07";
+
+    function generateCheckboxes()
+    {
+        var fieldset = document.getElementById("checkboxes");
+        var legend = document.createElement("legend");
+        legend.innerHTML = "Szerepkör";
+        fieldset.appendChild(legend);
+
+        for (var i = 0; i < everyRoleArray.length; i++)
+        {
+            var div = document.createElement("div");
+            var input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("value", everyRoleArray[i]);
+            var label = document.createElement("label");
+            label.innerHTML = everyRoleArray[i];
+            div.appendChild(input);
+            div.appendChild(label);
+            fieldset.appendChild(div);
+        }
+    }
+    generateCheckboxes();
 
     function nameSearch()
     {
@@ -166,20 +283,18 @@
 
     function tableRowSelect(event)
     {
-        document.getElementById("username").innerHTML = "Felhasználói beállítások: " + event.target.parentElement.children[1].innerHTML;
-        document.getElementById("name").innerHTML = "Név: " + event.target.parentElement.children[0].innerHTML;
-        document.getElementById("role").innerHTML = "Szerepkör: " + event.target.parentElement.children[2].innerHTML;
+        document.getElementById("name").value = event.target.parentElement.children[0].innerHTML;
+        document.getElementById("username").innerHTML = event.target.parentElement.children[1].innerHTML;
     }
 
 
 </script>
-
 <style>
     /*TABLE DESIGN*/
 
     #userTable {
         border-collapse: collapse; /* Collapse borders */
-        width: 50%; /* Full-width */
+        width: 100%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
     }
@@ -194,43 +309,58 @@
             border-bottom: 1px solid #ddd;
         }
 
-            #userTable tr.header, #userTable tr:hover {
+            #userTable tr:hover {
                 /* Add a grey background color to the table header and on hover */
                 background-color: #f1f1f1;
             }
 
+    tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
+    input[type="checkbox"] {
+        width: 40px;
+    }
+
     /*NAME SEARCHFIELD DESIGN*/
-
-    #nameSearchInput {
-        background-position: 10px 12px; /* Position the search icon */
-        background-repeat: no-repeat; /* Do not repeat the icon image */
-        width: 20%; /* Full-width */
+    .form-control {
+        width: 50%;
         font-size: 16px; /* Increase font-size */
         padding: 12px 20px 12px 40px; /* Add some padding */
         border: 1px solid #ddd; /* Add a grey border */
-        margin-bottom: 12px; /* Add some space below the input */
+        margin-bottom: 10px; /* Add some space below the input */
+        margin-top: 10px;
     }
 
-    /*USERNAME SEARCHFIELD DESIGN*/
 
-    #usernameSearchInput {
-        background-position: 10px 12px; /* Position the search icon */
-        background-repeat: no-repeat; /* Do not repeat the icon image */
-        width: 20%; /* Full-width */
+    #nameSearchInput, #usernameSearchInput, #roleInput {
+        width: 100%;
         font-size: 16px; /* Increase font-size */
-        padding: 12px 20px 12px 40px; /* Add some padding */
-        border: 1px solid #ddd; /* Add a grey border */
-        margin-bottom: 12px; /* Add some space below the input */
+        margin-bottom: 10px; /* Add some space below the input */
+        padding: 10px; /* Add some padding */
+        margin-top: 10px;
+        text-align: left;
+    }
+    #roleInput{
+        padding: 8px;
     }
 
-    /*  DROPDOWN SEARCH DESIGN */
+    button {
+        margin-bottom: 10px;
+        display: inline-block;
+        text-align: center;
+        width: 200px;
+        height: 50px;
+        float: right;
+    }
 
-    #roleInput {
-        background-position: 14px 12px;
-        background-repeat: no-repeat;
-        font-size: 16px;
-        padding: 14px 20px 12px 45px;
-        border: none;
-        border-bottom: 1px solid #ddd;
+    #registrationConfrimation {
+        width: 250px;
+        float: left;
+    }
+
+    legend, label {
+        padding: 3px 6px;
     }
 </style>

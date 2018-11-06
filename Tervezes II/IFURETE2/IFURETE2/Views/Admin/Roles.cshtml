@@ -12,72 +12,83 @@
     <div class="card-header">
         Szerepkörök
     </div>
+
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6" style="width: 30px">
+                    <button id="newRole" onclick="addNewRole()" class="btn btn-primary">Új szerepkör</button>
+                    <br />
+                    <b>Kereső:</b>
+                    <input type="text" id="roleSearchInput" onkeyup="roleSearch()" class="form-control" placeholder="Search for roles...">
+                    <b>Szerepkörök:</b>
+                    <table id="roleTable" class="table table-bordered"></table>
+                </div>
+                <div class="col-6">
+                    <div float="left">Felhasználói beállítások:</div> <b id="rolename">-</b>
+                    <div class="row">
+                        <div class="col-4" style="width: 30px">
+
+                            <div class="roleCategories">Anyagok:</div>
+                            <div class="roleCategories">Telephelyek:</div>
+                            <div class="roleCategories">Felhasználók:</div>
+                            <div class="roleCategories">Átvevői felület:</div>
+                            <div class="roleCategories">Beszállítói limitek:</div>
+                            <div class="roleCategories">Foglalási felület:</div>
+                            <div class="roleCategories">Riport felület:</div>
+                            <div class="roleCategories">EKÁER felület:</div>
+                        </div>
+                        <div class="col-7" style="width: 30px">
+                            <select name="roles" id=0 class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id=1 class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id=2 class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id="3" class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id="4" class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id="5" class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id="6" class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                            <select name="roles" id="7" class="custom-select">
+                                <option value="1">  Nem elérhető      </option>
+                                <option value="2">  Csak olvasás      </option>
+                                <option value="3">  Írás és Olvasás   </option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="saveChanges" onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<button onclick="addNewRole()">Új szerepkör</button>
-<br />
-Kereső:<br />
-<input type="text" id="roleSearchInput" onkeyup="roleSearch()" placeholder="Search for roles...">
-<br />
-Szerepkörök:<br />
-<table id="roleTable"></table>
 <br /><br /><br />
-Anyagok
-<select name="roles" id=0>
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Telephelyek
-<select name="roles" id=1>
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Felhasználók
-<select name="roles" id=2>
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Átvevői felület
-<select name="roles" id="3">
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Beszállítói limitek
-<select name="roles" id="4">
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Foglalási felület
-<select name="roles" id="5">
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-Riport felület
-<select name="roles" id="6">
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
-EKÁER felület
-<select name="roles" id="7">
-    <option value="1">  Nem elérhető      </option>
-    <option value="2">  Csak olvasás      </option>
-    <option value="3">  Írás és Olvasás   </option>
-</select>
-<br />
 <script>
 
     var roleArray = new Array();
@@ -187,6 +198,16 @@ EKÁER felület
         }
     }
 
+    document.getElementById("roleTable").addEventListener("click", tableRowSelect);
+
+    function tableRowSelect(event)
+    {
+        let nameField = document.getElementById("rolename");
+        nameField.innerHTML = event.target.parentElement.children[0].innerHTML;
+        nameField.number = event.target.parentElement.rowIndex;
+
+    }
+
     generateRoleTable();
     dropDown();
 
@@ -195,20 +216,51 @@ EKÁER felület
     #roleTable {
         text-align: center;
         border-collapse: collapse; /* Collapse borders */
-        width: 20%; /* Full-width */
+        width: 40%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
         table-layout: fixed
+    }
+
+    tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
     }
 
 
     #roleSearchInput, #roleName {
         background-position: 10px 12px; /* Position the search icon */
         background-repeat: no-repeat; /* Do not repeat the icon image */
-        width: 20%; /* Full-width */
+        width: 40%; /* Full-width */
         font-size: 16px; /* Increase font-size */
         padding: 12px 20px 12px 40px; /* Add some padding */
         border: 1px solid #ddd; /* Add a grey border */
         margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    .custom-select, .roleCategories {
+        width: 50%;
+        font-size: 16px; /* Increase font-size */
+        margin-bottom: 7px; /* Add some space below the input */
+        padding: 10px; /* Add some padding */
+        margin-top: 8px;
+        text-align: left;
+    }
+
+    .custom-select{
+        padding :8px;
+    }
+
+    .roleCategories {
+        width: 100%;
+    }
+
+    #saveChanges {
+        margin-top: 40px;
+        float: right;
+    }
+
+    #newRole {
+        margin-bottom: 20px;
     }
 </style>

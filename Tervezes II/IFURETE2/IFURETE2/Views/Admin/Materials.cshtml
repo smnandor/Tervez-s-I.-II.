@@ -16,10 +16,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-3" style="width: 30px">
-                    <button onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
+                    <button id="newMaterial" onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
                     <input type="text" id="materialSearchInput" onkeyup="materialSearch()" class="form-control" placeholder="Keress anyagnévre...">
                     <br />
-                    Anyag nevek:
+                    <b>Választható anyagok:</b>
                     <table id="materialTable" class="table table-bordered dataTable"></table>
                 </div>
                 <div class="col-9">
@@ -27,15 +27,12 @@
                     <br />
                     <input type="text" id="materialName" class="form-control" />
                     <table class="table table-bordered dataTable" id="shiftingTable"></table>
-
                     <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 <script>
 
 
@@ -260,7 +257,7 @@
     #materialTable {
         text-align: center;
         border-collapse: collapse; /* Collapse borders */
-        width: 60%; /* Full-width */
+        width: 200px; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
         table-layout: fixed;
@@ -275,6 +272,11 @@
         table-layout: fixed
     }
 
+    #materialTable tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
     .form-control {
         width: 100%;
         box-sizing: border-box;
@@ -286,5 +288,14 @@
 
     button {
         margin-bottom: 10px;
+        display: inline-block;
+        text-align: center;
+        width: 200px;
+        height: 50px;
+        float: right;
+    }
+
+    #newMaterial {
+        float: left;
     }
 </style>

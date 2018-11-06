@@ -12,7 +12,6 @@
     <div class="card-header">
         Telephelyek
     </div>
-
     <div class="card-body">
         <div class="container">
             <div class="row">
@@ -28,8 +27,7 @@
                     <table id="siteTable" class="table table-bordered"></table>
                 </div>
                 <div class="col-6">
-                    <div float="left">Telephelyi beállítások:</div> <b><div id="sitename1"></div></b>
-
+                    <div float="left">Telephelyi beállítások:</div> <b><div id="sitename1">-</div></b>
                     <div class="row">
                         <div class="col-4" style="width: 30px">
                             <br />
@@ -54,13 +52,12 @@
                             <input type="text" id="siteaddress" placeholder="Cím" class="form-control" />
                             <input type="text" id="contantName" placeholder="Kapcsolattartó" class="form-control" />
                             <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
-                            <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" /> 
-                            <input type="text" id="openFrom" placeholder="--:--" class="form-control" />                            
+                            <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
+                            <input type="text" id="openFrom" placeholder="--:--" class="form-control" />
                             <input type="text" id="openTo" placeholder="--:--" class="form-control" />
                             <input type="text" id="numberOfTrucks" placeholder="-" class="form-control" />
                         </div>
-                        <fieldset id="checkboxes">
-                        </fieldset> 
+                        <fieldset id="checkboxes"></fieldset>
                         <!--minden inputra on change, ha változik akkor az új értéket egy új változóba tárolja,
                             majd a mentés gombra kattintva frisíti az sql táblát az új értékekkel-->
                     </div>
@@ -68,12 +65,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
-
-
 
 
 <script>
@@ -121,12 +114,12 @@
             input.setAttribute("type", "checkbox");
             input.setAttribute("value", materialArray[i]);
             var label = document.createElement("label");
-            label.innerHTML = materialArray[i];            
+            label.innerHTML = materialArray[i];
             div.appendChild(input);
             div.appendChild(label);
             fieldset.appendChild(div);
 
-        }      
+        }
 
     }
     generateCheckboxes();
@@ -283,6 +276,11 @@
             /* Add a grey background color to the table header and on hover */
             background-color: #f1f1f1;
         }
+
+    tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
     /*NAME SEARCHFIELD DESIGN*/
 
     .form-control {
@@ -304,8 +302,7 @@
         margin-bottom: 12px; /* Add some space below the input */
     }
 
-    legend {        
-        
+    legend {
         padding: 3px 6px;
     }
 

@@ -10,25 +10,41 @@ Telephely:
 Beszállító:
 <select name="roles" id="selectPurveyor"></select>
 <br />
-Havi limit
-<input type="month" id="monthlyCalendar" />
-<br /><br />
-<table id="monthlyLimitTable"></table>
-<br /><br />
 
-Heti limit
-<input type="week" id="weeklyCalendar" />
-<br /><br />
-<table id="weeklyLimitTable"></table>
-<br /><br />
+<div class="card">
+    <div class="card-header">
+        Havi limit
+    </div>
+    <input type="month" id="monthlyCalendar" />
+    <br /><br />
+    <table id="monthlyLimitTable" class="table table-bordered"></table>
+    <br /><br />
+</div>
+<br />
+<div class="card">
+    <div class="card-header">
+        Heti limit
+    </div>
+    <input type="week" id="weeklyCalendar" />
+    <br /><br />
+    <table id="weeklyLimitTable" class="table table-bordered"></table>
+    <br /><br />
+</div>
+<br />
+<div class="card">
+    <div class="card-header">
+        Napi limit
+    </div>
+    <input type="date" id="dailyCalendar" />
+    <br /><br />
+    <table id="dailyLimitTable" class="table table-bordered"></table>
+    <br /><br />
+     <h3>Órákra bontva</h3>
+    <table id="hourlyLimitTable" class="table table-bordered"></table>
+    <br /><br />
+</div>
 
-Napi limit
-<input type="date" id="dailyCalendar" />
-<br /><br />
-<table id="dailyLimitTable"></table>
-<br /><br />
-<table id="hourlyLimitTable"></table>
-<br /><br />
+
 
 <script>
 
@@ -122,41 +138,35 @@ Napi limit
             var row = document.createElement("tr");
             var cell = document.createElement("td");
 
-            //ID
             cellText = document.createTextNode(purveyorArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
 
-            //SUPPLIER
             cellText = document.createTextNode(woodTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
             sumOfWoodTArray += woodTArray[i];
 
-            //TIME
             cellText = document.createTextNode(hayNoArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
             sumOfHayNoArray += hayNoArray[i];
 
-            //MATERIAL
             cellText = document.createTextNode(hayTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
             sumOfHayTArray += hayTArray[i];
 
-            //UNIT
             cellText = document.createTextNode(cutWoodTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
             sumOfCutWoodTArray += cutWoodTArray[i];
 
-            row.appendChild(cell);
             tblBody.appendChild(row);
         }
 
@@ -267,10 +277,10 @@ Napi limit
             cellText = document.createTextNode(cutWoodTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
-            cell = document.createElement("td");
             sumOfCutWoodTArray += cutWoodTArray[i];
+            cell = document.createElement("td");
 
-            row.appendChild(cell);
+
             tblBody.appendChild(row);
         }
 
@@ -381,10 +391,9 @@ Napi limit
             cellText = document.createTextNode(cutWoodTArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
-            cell = document.createElement("td");
             sumOfCutWoodTArray += cutWoodTArray[i];
+            cell = document.createElement("td");
 
-            row.appendChild(cell);
             tblBody.appendChild(row);
         }
 
@@ -524,10 +533,11 @@ Napi limit
 
             cellText = document.createTextNode(eightteenToTwentyArray[i]);
             cell.appendChild(cellText);
-            row.appendChild(cell);
+            row.appendChild(cell);    
             cell = document.createElement("td");
 
-            row.appendChild(cell);
+
+            
             tblBody.appendChild(row);
         }
 
@@ -546,25 +556,30 @@ Napi limit
 </script>
 
 <style>
-    table {
+    
+    #monthlyLimitTable, #weeklyLimitTable, #dailyLimitTable, #hourlyLimitTable {
         border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full-width */
+        width: 99%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
+        margin:10px;
     }
 
-    table, #recipientTable th, #recipientTable td {
+    table th, table td {
         text-align: left; /* Left-align text */
         padding: 12px; /* Add padding */
     }
 
-        table tr, #recipientTable tr {
-            /* Add a bottom border to all table rows */
-            border-bottom: 1px solid #ddd;
-        }
 
-            #recipientTable tr.header, #recipientTable tr:hover {
+
+            th, tr:hover {
                 /* Add a grey background color to the table header and on hover */
                 background-color: #f1f1f1;
+            }
+
+            input{
+                width: 20%;
+                margin: 10px;
+                padding: 5px;
             }
 </style>
