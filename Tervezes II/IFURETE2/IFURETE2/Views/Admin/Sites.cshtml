@@ -50,7 +50,7 @@
                         <div class="col-8" style="width: 30px">
                             <input type="text" id="sitename" placeholder="Név" class="form-control" />
                             <input type="text" id="siteaddress" placeholder="Cím" class="form-control" />
-                            <input type="text" id="contantName" placeholder="Kapcsolattartó" class="form-control" />
+                            <input type="text" id="contactName" placeholder="Kapcsolattartó" class="form-control" />
                             <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
                             <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
                             <input type="text" id="openFrom" placeholder="--:--" class="form-control" />
@@ -60,6 +60,7 @@
                         <fieldset id="checkboxes"></fieldset>
                         <!--minden inputra on change, ha változik akkor az új értéket egy új változóba tárolja,
                             majd a mentés gombra kattintva frisíti az sql táblát az új értékekkel-->
+                        
                     </div>
                     <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
                 </div>
@@ -297,6 +298,10 @@
         padding: 12px 20px 12px 40px; /* Add some padding */
         border: 1px solid #ddd; /* Add a grey border */
         margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    #sitename, #siteaddress, #contactName, #emailAddress, #phoneNumber, #openFrom, #openTo, #numberOfTrucks{
+        width:80%;
     }
 
     legend {
