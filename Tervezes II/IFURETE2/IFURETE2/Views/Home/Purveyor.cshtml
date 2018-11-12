@@ -2,14 +2,10 @@
 @{
     ViewData["Title"] = "Beszerző";
 }
-<h2>Beszerző</h2>
-
-Telephely:
-<select name="roles" id="selectSite"></select>
-<br />
-Beszállító:
-<select name="roles" id="selectPurveyor"></select>
-<br />
+<b>Telephely:</b>
+<select name="roles" id="selectSite" class="custom-select"></select>
+<b>Beszállító:</b>
+<select name="roles" id="selectPurveyor" class="custom-select"></select>
 
 <div class="card">
     <div class="card-header">
@@ -38,21 +34,21 @@ Beszállító:
     <input type="date" id="dailyCalendar" />
     <br /><br />
     <table id="dailyLimitTable" class="table table-bordered"></table>
-    <br /><br />
-     <h3>Órákra bontva</h3>
-    <table id="hourlyLimitTable" class="table table-bordered"></table>
-    <br /><br />
+    <div class="card">
+        <div class="card-header">
+            Órákra bontva
+        </div>
+        <table id="hourlyLimitTable" class="table table-bordered"></table>
+    </div>
 </div>
-
-
 
 <script>
 
     var selectSite = document.getElementById("selectSite");
     var selectPurveyor = document.getElementById("selectPurveyor");
 
-    var sites = ["Elso1", "Masodik1", "Harmadik1"];
-    var purveyors = ["Elso2", "Masodik2", "Harmadik2"];
+    var sites = ["Pécs", "Szakoly", "Tata"];
+    var purveyors = ["Tata", "Szakoly", "Pécs"];
 
     //LOOPS FOR FILLING UP THE DROPDOWNS
     for (var i = 0; i < sites.length; i++)
@@ -73,8 +69,6 @@ Beszállító:
     document.getElementById("monthlyCalendar").addEventListener("change", monthlyLimit);
     document.getElementById("weeklyCalendar").addEventListener("change", weeklyLimit);
     document.getElementById("dailyCalendar").addEventListener("change", dailyLimit);
-
-
 
     function monthlyLimit()
     {
@@ -535,8 +529,6 @@ Beszállító:
             cell.appendChild(cellText);
             row.appendChild(cell);    
             cell = document.createElement("td");
-
-
             
             tblBody.appendChild(row);
         }
@@ -551,7 +543,6 @@ Beszállító:
         tbl.setAttribute("border", "2");
     }
     hourlyLimitTable();
-
 
 </script>
 
@@ -570,16 +561,27 @@ Beszállító:
         padding: 12px; /* Add padding */
     }
 
+    th, tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
 
+    input{
+        width: 20%;
+        margin: 10px;
+        padding: 5px;
+    }
 
-            th, tr:hover {
-                /* Add a grey background color to the table header and on hover */
-                background-color: #f1f1f1;
-            }
+    #selectPurveyor, #selectSite {
+        width: 20%;
+        font-size: 16px; /* Increase font-size */
+        margin-bottom: 10px; /* Add some space below the input */
+        padding: 8px; /* Add some padding */
+        margin-top: 10px;
+        text-align: left;
+    }
 
-            input{
-                width: 20%;
-                margin: 10px;
-                padding: 5px;
-            }
+    b{
+        padding: 8px;
+    }
 </style>

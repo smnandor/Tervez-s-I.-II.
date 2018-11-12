@@ -70,9 +70,7 @@
 
             var cell = document.createElement("td");
             var cellText
-
             cellText = document.createTextNode(materialArray[i]);
-
 
             cell.appendChild(cellText);
             row.appendChild(cell);
@@ -118,8 +116,6 @@
             }
         }
     }
-
-
 
     function tableRowSelect(event)
     {
@@ -272,7 +268,7 @@
         table-layout: fixed
     }
 
-    #materialTable tr:hover {
+    #shiftingTable tr:hover, #materialTable tr:hover {
         /* Add a grey background color to the table header and on hover */
         background-color: #f1f1f1;
     }

@@ -38,6 +38,11 @@ namespace IFURETE2.Controllers
             return View();
         }
 
+        public IActionResult Rejected()
+        {
+            return View();
+        }
+
         public IActionResult Report()
         {
             return View();

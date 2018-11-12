@@ -3,5 +3,126 @@
     ViewData["Title"] = "Rejected";
 }
 
-<h2>Rejected</h2>
+<div class="card">
+    <div class="card-header">
+        Elutasított beszállítások
+    </div>
 
+    <table id="reportTable" class="table table-bordered"></table>
+
+</div>
+
+<script>
+
+        var idArray = new Array;
+    idArray = ["000081", "000001", "000004", "000044"];
+
+    function generateRecipientTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var thOfRecipientArray = ["Azonosító", "Beszállító", "Szállítás időpontja", "Anyag", "Lefoglalt mennyiség", "Valós mennyiség"];
+
+        var tbl = document.getElementById("reportTable");
+        var tblBody = document.createElement("tbody");
+
+        var supplierArray = new Array;
+        supplierArray = ["Mecsekerdő Zrt.", "Sefog Zrt.", "Jankovics Kft.", "Jankovics Kft."];
+
+        var timeArray = new Array;
+        timeArray = ["14:00 - 16:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00"];
+
+        var materialArray = new Array;
+        materialArray = ["Fűrészpor", "Keményfa", "Szalma", "Erdei Apríték"];
+
+        var unitArray = new Array;
+        unitArray = ["20 t", "16 t", "10 t", "13 t"];
+
+        var actualArray = new Array;
+        actualArray = ["14 t", "11 t", "3 t", "7 t"];
+
+        var row = document.createElement("tr");
+        var cellText
+        for (var i = 0; i < thOfRecipientArray.length; i++)
+        {
+            var cell = document.createElement("th");
+            cellText = document.createTextNode(thOfRecipientArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+        }
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < supplierArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            var cell = document.createElement("td");
+
+            //ID
+            cellText = document.createTextNode(idArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell.setAttribute("width", "10%");
+            cell = document.createElement("td");
+
+
+            //SUPPLIER
+            cellText = document.createTextNode(supplierArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //TIME
+            cellText = document.createTextNode(timeArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //MATERIAL
+            cellText = document.createTextNode(materialArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //UNIT
+            cellText = document.createTextNode(unitArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+            //ACTUAL UNIT
+            cellText = document.createTextNode(actualArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            cell = document.createElement("td");
+
+
+            tblBody.appendChild(row);
+        }
+
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    generateRecipientTable();
+
+
+</script>
+<style>
+    #reportTable {
+        text-align: center;
+        vertical-align: middle;
+        width: 98%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+        margin: 1%;
+    }
+
+    #reportTable tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
+</style>

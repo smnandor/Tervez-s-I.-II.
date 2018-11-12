@@ -2,19 +2,36 @@
 @{
     ViewData["Title"] = "Átvevő";
 }
-<h2>Átvevő</h2>
-<table id="recipientTable"></table>
+<div class="card">
+    <div class="card-header">
+        Beszállítási információk
+    </div>
+    <h2 id="todaysDate">Beszállítások a mai napon. </h2>
+    <table id="recipientTable" class="table table-bordered"></table>
 
-Beszállító:
-<select name="roles" id="selectPurveyor"></select>
-<br />
-Napi limit
-<input type="date" id="dailyCalendar" />
-<br /><br />
-<table id="dailyLimitTable"></table>
-<br /><br />
-<table id="hourlyLimitTable"></table>
+    <b >Beszállító:</b>
+    <select name="roles" id="selectPurveyor" class="custom-select"></select>
+    <br />
+    <div class="card">
+        <div class="card-header">
+            Mai napon várható beszállítók és a hozzájuk tatozó limitek
+        </div>
+        <table id="dailyLimitTable" class="table table-bordered"></table>
+
+        <table id="hourlyLimitTable" class="table table-bordered"></table>
+    </div>
+</div>
+
 <script>
+
+    function getTodaysDate(){
+        n = new Date();
+        y = n.getFullYear();
+        m = n.getMonth() + 1;
+        d = n.getDate();
+        document.getElementById("todaysDate").innerHTML += "(" +y + ":" + m + ":" + d + ")";
+    }
+    getTodaysDate();
 
     var idArray = new Array;
     idArray = ["000081", "000001", "000004", "000044"];
@@ -36,7 +53,7 @@ Napi limit
         materialArray = ["Fűrészpor", "Keményfa", "Erdei Apríték", "Erdei Apríték"];
 
         var unitArray = new Array;
-        unitArray = ["20 t", "20 t", "20 t", "20 t"];
+        unitArray = ["20 t", "16 t", "10 t", "13 t"];
 
         var row = document.createElement("tr");
         var cellText
@@ -59,7 +76,9 @@ Napi limit
             cellText = document.createTextNode(idArray[i]);
             cell.appendChild(cellText);
             row.appendChild(cell);
+            cell.setAttribute("width", "10%");
             cell = document.createElement("td");
+
 
             //SUPPLIER
             cellText = document.createTextNode(supplierArray[i]);
@@ -89,6 +108,7 @@ Napi limit
             cellText = document.createElement("INPUT");
             cellText.setAttribute("type", "number");
             cellText.setAttribute("id", i);
+            cell.setAttribute("class", "actualTD");
             cell.appendChild(cellText);
             row.appendChild(cell);
             cell = document.createElement("td");
@@ -97,16 +117,19 @@ Napi limit
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Beérkezett"));
             cellText.setAttribute("id", i + ".1");
+            cellText.setAttribute("class", "btn btn-secondary");
             cell.appendChild(cellText);
 
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Mérlegelt"));
             cellText.setAttribute("id", i + ".2");
+            cellText.setAttribute("class", "btn btn-secondary");
             cell.appendChild(cellText);
 
             cellText = document.createElement("button");
             cellText.appendChild(document.createTextNode("Elutasítva"));
             cellText.setAttribute("id", i + ".3");
+            cellText.setAttribute("class", "btn btn-secondary");
             cell.appendChild(cellText);
 
             row.appendChild(cell);
@@ -135,13 +158,15 @@ Napi limit
     function arrivedButton(event)
     {
         console.log(event.target.parentNode.parentNode.firstChild.innerHTML);
-        if (event.target.style.backgroundColor != "green")
+        if (event.target.className != "btn btn-success")
         {
-            event.target.style.backgroundColor = "green";
+            event.target.setAttribute("class", "btn btn-success");
+
         }
         else
         {
-            event.target.style.backgroundColor = "#e7e7e7";
+            event.target.setAttribute("class", "btn btn-secondary");
+
         }
 
     }
@@ -149,13 +174,13 @@ Napi limit
     function weighedButton(event)
     {
         console.log(event.target.parentNode.parentNode.firstChild.innerHTML);
-        if (event.target.style.backgroundColor != "green")
+        if (event.target.className != "btn btn-success")
         {
-            event.target.style.backgroundColor = "green";
+            event.target.setAttribute("class", "btn btn-success");
         }
         else
         {
-            event.target.style.backgroundColor = "#e7e7e7";
+            event.target.setAttribute("class", "btn btn-secondary");
         }
 
     }
@@ -163,13 +188,13 @@ Napi limit
     function deniedButton(event)
     {
         console.log(event.target.parentNode.parentNode.firstChild.innerHTML);
-        if (event.target.style.backgroundColor != "red")
+        if (event.target.className != "btn btn-danger")
         {
-            event.target.style.backgroundColor = "red";
+            event.target.setAttribute("class", "btn btn-danger");
         }
         else
         {
-            event.target.style.backgroundColor = "#e7e7e7";
+            event.target.setAttribute("class", "btn btn-secondary");
         }
 
     }
@@ -182,14 +207,7 @@ Napi limit
         el.textContent = purveyors[i];
         el.value = purveyors[i];
         selectPurveyor.appendChild(el);
-    }
-
-    document.getElementById("dailyCalendar").addEventListener("change", dailyLimit, { passive: true });
-    function dailyLimit()
-    {
-        var pickedDate = document.getElementById("dailyCalendar");
-        console.log(pickedDate.value);
-    }
+    }      
 
     function dailyLimitTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
     {
@@ -268,7 +286,6 @@ Napi limit
             cell = document.createElement("td");
             sumOfCutWoodTArray += cutWoodTArray[i];
 
-            row.appendChild(cell);
             tblBody.appendChild(row);
         }
 
@@ -410,7 +427,6 @@ Napi limit
             row.appendChild(cell);
             cell = document.createElement("td");
 
-            row.appendChild(cell);
             tblBody.appendChild(row);
         }
 
@@ -425,35 +441,37 @@ Napi limit
     }
     hourlyLimitTable();
 
-
 </script>
 <style>
-    table, #recipientTable {
-        border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full-width */
+
+    #recipientTable, #dailyLimitTable, #hourlyLimitTable {
+        text-align: center;
+        vertical-align: middle;
+        width: 98%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
+        margin: 1%;
     }
-
-    #dailyLimitTable {
-        border-collapse: collapse; /* Collapse borders */
-        width: 60%; /* Full-width */
-        border: 1px solid #ddd; /* Add a grey border */
-        font-size: 18px; /* Increase font-size */
-    }
-
-    table, #recipientTable th, #recipientTable td {
-        text-align: left; /* Left-align text */
-        padding: 12px; /* Add padding */
-    }
-
-        table tr, #recipientTable tr {
-            /* Add a bottom border to all table rows */
-            border-bottom: 1px solid #ddd;
+ 
+        #recipientTable tr:hover, #dailyLimitTable tr:hover, #hourlyLimitTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
         }
 
-            #recipientTable tr.header, #recipientTable tr:hover {
-                /* Add a grey background color to the table header and on hover */
-                background-color: #f1f1f1;
-            }
+    h2, b, #selectPurveyor{
+        margin:8px;
+    }
+
+    button{
+        margin: 1px;
+    }
+
+    input{
+        text-align:center;
+    }
+
+    #selectPurveyor{
+        width:20%;
+    }
+
 </style>

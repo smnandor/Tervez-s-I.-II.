@@ -2,23 +2,29 @@
 @{
     ViewData["Title"] = "Report";
 }
-<h2>Report</h2>
-Beszállító:
-<select name="roles" id="selectPurveyor"></select>
-<br />
 
-<form id="typeForm">
-    <input type="radio" name="type" id="monthly"> Havi riport<br>
-    <input type="radio" name="type" id="daily"> Napi riport<br>
-</form>
-<br /><br />
-<p id="placeForDayCalendar" />
-<p id="placeForFromCalendar" />
-<p id="placeForToCalendar" />
-<br />
+<div class="card">
+    <div class="card-header">
+        Report
+    </div>
 
-<table id="reportTable"></table>
+    <b>Beszállító:</b>
+    <select name="roles" id="selectPurveyor" class="custom-select"></select>
+    <br />
 
+    <form id="typeForm">
+        <input type="radio" name="type" id="daily">  <b>Napi riport</b>
+        <input type="radio" name="type" id="monthly">  <b>Havi riport</b>
+    </form>
+    <br /><br />
+    <p id="placeForDayCalendar" />
+    <b id="placeForText"></b>
+    <p id="placeForFromCalendar" />
+    <p id="placeForToCalendar" />
+    <br />
+
+    <table id="reportTable" class="table table-bordered"></table>
+</div>
 <script>
     var selectPurveyor = document.getElementById("selectPurveyor");
     var purveyors = ["Sefag Zrt.", "Jankovicz Kft.", "Agroeuropa d.o.o", "Agrogreen Kft.", "Atiméd Kft."];
@@ -29,7 +35,6 @@ Beszállító:
         el.value = purveyors[i];
         selectPurveyor.appendChild(el);
     }
-
 
     function generateReportTable()
     {
@@ -100,7 +105,6 @@ Beszállító:
             row.appendChild(cell);
             cell = document.createElement("td");
 
-            row.appendChild(cell);
             tblBody.appendChild(row);
         }
 
@@ -124,8 +128,11 @@ Beszállító:
             var placeForDayCalendar = document.getElementById("placeForDayCalendar");
             placeForDayCalendar.removeChild(placeForDayCalendar.firstChild);
 
+     
+
             var fromDate = document.createElement("INPUT");
             fromDate.setAttribute("type", "month");
+            fromDate.setAttribute("class", "form-control");
             var placeForFromCalendar = document.getElementById("placeForFromCalendar");
 
             placeForFromCalendar.appendChild(fromDate);
@@ -139,6 +146,7 @@ Beszállító:
 
             var toDate = document.createElement("INPUT");
             toDate.setAttribute("type", "month");
+            toDate.setAttribute("class", "form-control");
             var placeForToCalendar = document.getElementById("placeForToCalendar");
 
             placeForToCalendar.appendChild(toDate);
@@ -162,6 +170,7 @@ Beszállító:
 
             var date = document.createElement("INPUT");
             date.setAttribute("type", "date");
+            date.setAttribute("class", "form-control");
             var placeForDayCalendar = document.getElementById("placeForDayCalendar");
 
             placeForDayCalendar.appendChild(date);
@@ -176,42 +185,40 @@ Beszállító:
         }
 
         generateReportTable();
-
     }
-
-
-    
 
 </script>
 
 <style>
-
-    table, #recipientTable {
-        border-collapse: collapse; /* Collapse borders */
-        width: 100%; /* Full-width */
+    #reportTable {
+        text-align: center;
+        vertical-align: middle;
+        width: 98%; /* Full-width */
         border: 1px solid #ddd; /* Add a grey border */
         font-size: 18px; /* Increase font-size */
+        margin: 1%;
     }
 
-    #dailyLimitTable {
-        border-collapse: collapse; /* Collapse borders */
-        width: 60%; /* Full-width */
-        border: 1px solid #ddd; /* Add a grey border */
-        font-size: 18px; /* Increase font-size */
-    }
-
-    table, #recipientTable th, #recipientTable td {
-        text-align: left; /* Left-align text */
-        padding: 12px; /* Add padding */
-    }
-
-        table tr, #recipientTable tr {
-            /* Add a bottom border to all table rows */
-            border-bottom: 1px solid #ddd;
+        #reportTable tr:hover{
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
         }
 
-            #recipientTable tr.header, #recipientTable tr:hover {
-                /* Add a grey background color to the table header and on hover */
-                background-color: #f1f1f1;
-            }
+    h2, b, #selectPurveyor, form {
+        margin: 5px;
+    }
+
+    #selectPurveyor, .form-control {
+        width: 20%;
+    }
+
+    b{
+        margin-right: 30px;
+        font-size:20px;  
+
+    }
+
+    input{
+        margin:10px;
+    }
 </style>
