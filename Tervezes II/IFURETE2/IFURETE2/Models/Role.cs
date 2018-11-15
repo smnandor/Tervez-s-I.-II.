@@ -8,7 +8,7 @@ namespace IFURETE2.Models
     public class Role
     {
         public int ID { get; set; }
-        public string role { get; set; }
+        public string name_of_role { get; set; }
         public int material { get; set; }
         public int sites { get; set; }
         public int users { get; set; }

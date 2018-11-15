@@ -19,5 +19,7 @@ namespace IFURETE2.Models
         public int phone_number { get; set; }
         [StringLength(60, MinimumLength = 3)]
         public string e_mail { get; set; }
+        public bool isconfirmed { get; set; }
+
     }
 }

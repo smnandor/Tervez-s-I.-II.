@@ -18,5 +18,7 @@ namespace IFURETE2.Models
         public TimeSpan time_end { get; set; }
         public int weight { get; set; }
         public int number_of_trucks { get; set; }
+        public int amount { get; set; }
+
     }
 }
