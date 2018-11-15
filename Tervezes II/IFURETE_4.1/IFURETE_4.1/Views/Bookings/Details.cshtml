@@ -1,0 +1,54 @@
+﻿@model IFURETE4.Models.Booking
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.time_start)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.time_start)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.time_end)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.time_end)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.number_of_trucks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.number_of_trucks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.amount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

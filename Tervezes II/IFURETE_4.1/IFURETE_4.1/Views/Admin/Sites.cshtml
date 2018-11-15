@@ -1,0 +1,327 @@
+﻿
+@{
+    ViewData["Title"] = "Telephelyek";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        Telephelyek
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-6" style="width: 30px">
+                    <div class="row">
+                        <div class="col-6" style="width: 30px">
+                            <input type="text" id="nameSearchInput" onkeyup="nameSearch()" class="form-control" placeholder="Keresés névre...">
+                        </div>
+                        <div class="col-6" style="width: 30px">
+                            <input type="text" id="addressSearchInput" onkeyup="addressSearch()" class="form-control" placeholder="Keresés címre...">
+                        </div>
+                    </div>
+                    <table id="siteTable" class="table table-bordered"></table>
+                </div>
+                <div class="col-6">
+                    <div float="left">Telephelyi beállítások:</div> <b><div id="sitename1">-</div></b>
+                    <div class="row">
+                        <div class="col-4" style="width: 30px">
+                            <br />
+                            Név:
+                            <br /> <br />
+                            Cím:
+                            <br /> <br />
+                            Kapcsolattartó:
+                            <br /> <br />
+                            E-mail cím:
+                            <br /> <br />
+                            Telefonszám:
+                            <br /> <br />
+                            Nyitás:
+                            <br /> <br />
+                            Zárás:
+                            <br /> <br />
+                            Max kamionok száma/2 óra:
+                        </div>
+                        <div class="col-8" style="width: 30px">
+                            <input type="text" id="sitename" placeholder="Név" class="form-control" />
+                            <input type="text" id="siteaddress" placeholder="Cím" class="form-control" />
+                            <input type="text" id="contactName" placeholder="Kapcsolattartó" class="form-control" />
+                            <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
+                            <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
+                            <input type="text" id="openFrom" placeholder="--:--" class="form-control" />
+                            <input type="text" id="openTo" placeholder="--:--" class="form-control" />
+                            <input type="text" id="numberOfTrucks" placeholder="-" class="form-control" />
+                        </div>
+                        <fieldset id="checkboxes"></fieldset>
+                        <!--minden inputra on change, ha változik akkor az új értéket egy új változóba tárolja,
+                            majd a mentés gombra kattintva frisíti az sql táblát az új értékekkel-->
+                        
+                    </div>
+                    <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById("siteTable").addEventListener("click", tableRowSelect);
+    document.getElementById("sitename").addEventListener("change", nameChange);
+    document.getElementById("siteaddress").addEventListener("change", addressChange);
+
+    var siteArray = new Array();
+    siteArray[0] = "Pécs";
+    siteArray[1] = "Szakoly";
+    siteArray[2] = "Tata";
+    siteArray[3] = "Dorog";
+
+    var addressArray = new Array();
+    addressArray[0] = "Pécs, Edison utca 1.";
+    addressArray[1] = "Szakoly, Erőmű u. 43.";
+    addressArray[2] = "Tata, Szabadság utca 2.";
+    addressArray[3] = "Dorog, Nyárfa utca 56.";
+
+    var materialArray = new Array();
+    materialArray[0] = "Apríték";
+    materialArray[1] = "Fűrészpor";
+    materialArray[2] = "Keményfa";
+    materialArray[3] = "Lágyfa";
+    materialArray[4] = "Átmeneti fa";
+    materialArray[5] = "Szalma";
+
+    var openFrom = "8:00";
+    var openTo = "21:00";
+    var numberOfTrucks = 5;
+
+    function generateCheckboxes()
+    {
+        var fieldset = document.getElementById("checkboxes");
+        var legend = document.createElement("legend");
+        legend.innerHTML = "Telephelyre szállítható anyagok";
+        fieldset.appendChild(legend);
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            var div = document.createElement("div");
+            var input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("value", materialArray[i]);
+            var label = document.createElement("label");
+            label.innerHTML = materialArray[i];
+            div.appendChild(input);
+            div.appendChild(label);
+            fieldset.appendChild(div);
+        }
+
+    }
+    generateCheckboxes();
+
+    function generatSiteTable()
+    {
+        var tbl = document.getElementById("siteTable");
+        var tblBody = document.createElement("tbody");
+        var row = document.createElement("tr");
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("Telephely neve");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        var cell = document.createElement("th");
+        var cellText = document.createTextNode("Cím");
+        cell.appendChild(cellText);
+        row.appendChild(cell);
+        tblBody.appendChild(row);
+
+        for (var i = 0; i < siteArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            row.setAttribute("rowIndex", i);
+
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(siteArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+            var cell = document.createElement("td");
+            var cellText = document.createTextNode(addressArray[i]);
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+
+            tblBody.appendChild(row);
+        }
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+    generatSiteTable();
+
+    /*NAME SEARCH FIELD*/
+    function nameSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("nameSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("siteTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /*ADDRESS SEARCH FIELD*/
+    function addressSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("addressSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("siteTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    /*FILTER SELECTED FOR ITEM*/
+    function tableRowSelect(event)
+    {
+        let nameField = document.getElementById("sitename1");
+        nameField.innerHTML = event.target.parentElement.children[0].innerHTML;
+        nameField.number = event.target.parentElement.rowIndex;
+
+        let nameInputField = document.getElementById("sitename");
+        nameInputField.value = event.target.parentElement.children[0].innerHTML;
+        nameInputField.number = event.target.parentElement.rowIndex;
+
+        let addressInputField = document.getElementById("siteaddress");
+        addressInputField.value = event.target.parentElement.children[1].innerHTML;
+        addressInputField.number = event.target.parentElement.rowIndex;
+    }
+
+    /*CHANGING NAME TD VALUE FROM INPUT FIELD VALUE*/
+    function nameChange(event)
+    {
+        var rowIndex = document.getElementById("sitename").number;
+        document
+            .getElementById("siteTable")
+            .getElementsByTagName("tr")[rowIndex]
+            .children[0]
+            .innerHTML = event.target.value;
+    }
+
+    /*CHANGING ADDRESS TD VALUE FROM INPUT FIELD VALUE*/
+    function addressChange(event)
+    {
+        var rowIndex = document.getElementById("siteaddress").number;
+        document
+            .getElementById("siteTable")
+            .getElementsByTagName("tr")[rowIndex]
+            .children[1]
+            .innerHTML = event.target.value;
+    }
+
+</script>
+<style>
+    #siteTable th, #siteTable td {
+        text-align: left; /* Left-align text */
+        padding: 12px; /* Add padding */
+        width: 49%;
+    }
+
+    #siteTable tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+        #siteTable tr.header, #siteTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+        }
+
+    tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+    /*NAME SEARCHFIELD DESIGN*/
+
+    .form-control {
+        width: 50%;
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 10px; /* Add some space below the input */
+        margin-top: 10px;
+    }
+
+    #addressSearchInput, #nameSearchInput {
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 100%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+
+    #sitename, #siteaddress, #contactName, #emailAddress, #phoneNumber, #openFrom, #openTo, #numberOfTrucks{
+        width:80%;
+    }
+
+    legend {
+        padding: 3px 6px;
+    }
+
+    .output {
+        font: 1rem 'Fira Sans', sans-serif;
+    }
+
+    input {
+        margin: .4rem;
+    }
+
+    button {
+        margin-bottom: 10px;
+        display: inline-block;
+        text-align: center;
+        width: 200px;
+        height: 50px;
+        float: right;
+    }
+</style>

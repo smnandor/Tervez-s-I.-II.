@@ -1,0 +1,36 @@
+﻿@model IFURETE4.Models.Limit
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Limit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name_of_company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.name_of_company)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.material)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.material)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.limit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.limit)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

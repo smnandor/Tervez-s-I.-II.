@@ -1,0 +1,297 @@
+﻿
+@{
+    ViewData["Title"] = "Anyagok";
+}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Materials">Anyagok</a></li>
+    <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Roles">Szerepkörök</a></li>
+</ol>
+<div class="card">
+    <div class="card-header">
+        Anyagok
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-3" style="width: 30px">
+                    <button id="newMaterial" onclick="addNewMaterial()" class="btn btn-primary">Új anyag hozzáadása</button>
+                    <input type="text" id="materialSearchInput" onkeyup="materialSearch()" class="form-control" placeholder="Keress anyagnévre...">
+                    <br />
+                    <b>Választható anyagok:</b>
+                    <table id="materialTable" class="table table-bordered dataTable"></table>
+                </div>
+                <div class="col-9">
+                    Kiválasztott elem:
+                    <br />
+                    <input type="text" id="materialName" class="form-control" />
+                    <table class="table table-bordered dataTable" id="shiftingTable"></table>
+                    <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var materialArray = new Array();
+    materialArray[0] = "Szalma";
+    materialArray[1] = "Apríték";
+    materialArray[2] = "Hengeres Fa";
+
+    var unitArray = new Array();
+    unitArray[0] = "Tonna";
+    unitArray[1] = "Bála";
+    unitArray[2] = "Kg";
+
+    var numberArray = new Array();
+    numberArray[0] = 1;
+    numberArray[1] = 0.5;
+    numberArray[2] = 0.001;
+
+    function addNewMaterial()
+    {
+        var newMaterial = prompt("Adjon meg egy új anyagot.");
+        materialArray.push(newMaterial);
+        generateMaterialTable();
+    }
+
+    function generateMaterialTable()
+    {
+        var tbl = document.getElementById("materialTable");
+        var tblBody = document.createElement("tbody");
+
+        for (var i = 0; i < materialArray.length; i++)
+        {
+            var row = document.createElement("tr");
+            row.setAttribute("rowIndex", i);
+
+            var cell = document.createElement("td");
+            var cellText
+            cellText = document.createTextNode(materialArray[i]);
+
+            cell.appendChild(cellText);
+            row.appendChild(cell);
+            tblBody.appendChild(row);
+        }
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    document.getElementById("materialSearchInput").addEventListener("change", materialSearch);
+    document.getElementById("materialTable").addEventListener("click", tableRowSelect);
+    document.getElementById("materialName").addEventListener("change", materialNameChange);
+
+    function materialSearch()
+    {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("materialSearchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("materialTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++)
+        {
+            td = tr[i].getElementsByTagName("td")[0];
+
+            if (td)
+            {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+                {
+
+                    tr[i].style.display = "";
+                }
+                else
+                {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function tableRowSelect(event)
+    {
+        let nameInputField = document.getElementById("materialName");
+        nameInputField.value = event.target.parentElement.children[0].innerHTML;
+        nameInputField.number = event.target.parentElement.rowIndex;
+
+    }
+
+    function materialNameChange(event)
+    {
+        var rowIndex = document.getElementById("materialName").number;
+        document
+            .getElementById("materialTable")
+            .getElementsByTagName("tr")[rowIndex]
+            .children[0]
+            .innerHTML = event.target.value;
+    }
+
+    function generateShiftingTable() // megkapja a selected item id-t és azt queryzi le a táblából feltöltve a tömböket adattagokkal
+    {
+        var tbl = document.getElementById("shiftingTable");
+        var tblBody = document.createElement("tbody");
+
+        var newItem = document.createElement("INPUT");
+        newItem.setAttribute("type", "text");
+        newItem.setAttribute("id", "newItem");
+
+        var newNumber = document.createElement("INPUT");
+        newNumber.setAttribute("type", "number");
+        newNumber.setAttribute("id", "newNumber");
+
+        for (var i = 0; i < unitArray.length + 2; i++)
+        {
+            var row = document.createElement("tr");
+
+            for (var j = 0; j < unitArray.length + 1; j++)
+            {
+
+                var cellText
+                if (i == 0 && j == 0)              //setting first cell to be empty
+                {
+                    var cell = document.createElement("td");
+                    cellText = document.createTextNode("");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (i - 1 == unitArray.length && j == 0) //making the bottom left cell to be an input field
+                {
+                    var cell = document.createElement("td");
+                    cellText = newItem;
+                    cellText.setAttribute("class", "form-control");
+                    cellText.setAttribute("placeholder", "Mértékegység");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (i - 1 == unitArray.length && j == 1) // creating the new number input field
+                {
+                    var cell = document.createElement("td");
+                    cellText = newNumber;
+                    cellText.setAttribute("class", "form-control");
+                    cellText.setAttribute("placeholder", "Váltószám");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (i == 0 && j > 0)       //filling the first row
+                {
+                    var cell = document.createElement("th");
+                    cellText = document.createTextNode(unitArray[j - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (i > 0 && j == 0)       //filling the first collumn
+                {
+                    var cell = document.createElement("th");
+                    cellText = document.createTextNode(unitArray[i - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (i > unitArray.length || j > unitArray.length) // making the last row blank
+                {
+                    var cell = document.createElement("td");
+                    cellText = document.createTextNode("");
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else if (j == 1) // filling the second collumn with the given numbers
+                {
+                    var cell = document.createElement("td");
+                    cellText = document.createTextNode(numberArray[i - 1]);
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                else    //calculating
+                {
+                    var cell = document.createElement("td");
+                    cellText = document.createTextNode((numberArray[i - 1] / numberArray[j - 1]));
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+            }
+            tblBody.appendChild(row);
+        }
+        while (tbl.firstChild)
+        {
+            tbl.removeChild(tbl.firstChild);
+        }
+        tbl.appendChild(tblBody);
+        tbl.setAttribute("border", "2");
+    }
+
+    function submit()
+    {
+        var newItem = document.getElementById("newItem").value;
+        var newNumber = document.getElementById("newNumber").value
+
+        if (newItem != "" && newNumber != "" && newNumber > 0)
+        {
+            unitArray.push(newItem);
+            numberArray.push(newNumber);
+        }
+        else
+        {
+            alert("Adjon meg egy új egységet és egy váltószámot ami nagyobb mint 0");
+        }
+        generateMaterialTable();
+        generateShiftingTable();
+    }
+
+    generateMaterialTable();
+    generateShiftingTable();
+
+</script>
+<style>
+    #materialTable {
+        text-align: center;
+        border-collapse: collapse; /* Collapse borders */
+        width: 200px; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+        table-layout: fixed;
+    }
+
+    #shiftingTable {
+        text-align: center;
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+        table-layout: fixed
+    }
+
+    #shiftingTable tr:hover, #materialTable tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #materialName, #materialSearchInput {
+        width: 200px;
+    }
+
+    button {
+        margin-bottom: 10px;
+        display: inline-block;
+        text-align: center;
+        width: 200px;
+        height: 50px;
+        float: right;
+    }
+
+    #newMaterial {
+        float: left;
+    }
+</style>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<IFURETE4.Models.Role>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name_of_role)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.material)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sites)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.users)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.recipient_ui)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.supplier_limit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.booking_ui)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.report_ui)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EAKER_ui)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name_of_role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.material)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.users)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recipient_ui)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.supplier_limit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.booking_ui)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.report_ui)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EAKER_ui)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
