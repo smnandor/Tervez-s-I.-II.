@@ -53,7 +53,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,role,material,sites,users,recipient_ui,supplier_limit,booking_ui,report_ui,EAKER_ui")] Role role)
+        public async Task<IActionResult> Create([Bind("ID,name_of_role,material,sites,users,recipient_ui,supplier_limit,booking_ui,report_ui,EAKER_ui")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,role,material,sites,users,recipient_ui,supplier_limit,booking_ui,report_ui,EAKER_ui")] Role role)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,name_of_role,material,sites,users,recipient_ui,supplier_limit,booking_ui,report_ui,EAKER_ui")] Role role)
         {
             if (id != role.ID)
             {

@@ -53,7 +53,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,name,username,phone_number,e_mail")] User user)
+        public async Task<IActionResult> Create([Bind("ID,name,password,username,phone_number,e_mail,is_confirmed,is_logged_in")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,name,username,phone_number,e_mail")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,name,password,username,phone_number,e_mail,is_confirmed,is_logged_in")] User user)
         {
             if (id != user.ID)
             {

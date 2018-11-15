@@ -53,7 +53,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,date,time_start,time_end,weight,number_of_trucks")] Booking booking)
+        public async Task<IActionResult> Create([Bind("ID,date,time_start,time_end,weight,number_of_trucks,amount")] Booking booking)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace IFURETE2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,date,time_start,time_end,weight,number_of_trucks")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,date,time_start,time_end,weight,number_of_trucks,amount")] Booking booking)
         {
             if (id != booking.ID)
             {

@@ -1,0 +1,65 @@
+﻿@model IFURETE2.Models.Site
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Site</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameOfContact" class="control-label"></label>
+                <input asp-for="NameOfContact" class="form-control" />
+                <span asp-validation-for="NameOfContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddressOfContact" class="control-label"></label>
+                <input asp-for="EmailAddressOfContact" class="form-control" />
+                <span asp-validation-for="EmailAddressOfContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhonenumberOfContact" class="control-label"></label>
+                <input asp-for="PhonenumberOfContact" class="form-control" />
+                <span asp-validation-for="PhonenumberOfContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpenFrom" class="control-label"></label>
+                <input asp-for="OpenFrom" class="form-control" />
+                <span asp-validation-for="OpenFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpenTo" class="control-label"></label>
+                <input asp-for="OpenTo" class="form-control" />
+                <span asp-validation-for="OpenTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfTrucks" class="control-label"></label>
+                <input asp-for="NumberOfTrucks" class="form-control" />
+                <span asp-validation-for="NumberOfTrucks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

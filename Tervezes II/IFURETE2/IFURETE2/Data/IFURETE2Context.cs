@@ -21,5 +21,19 @@ namespace IFURETE2.Models
         public DbSet<IFURETE2.Models.Users_Roles> Users_Roles { get; set; }
 
         public DbSet<IFURETE2.Models.Booking> Booking { get; set; }
+
+        public DbSet<IFURETE2.Models.Booking_Delivery> Booking_Delivery { get; set; }
+
+        public DbSet<IFURETE2.Models.Delivery> Delivery { get; set; }
+
+        public DbSet<IFURETE2.Models.Limit> Limit { get; set; }
+
+        public DbSet<IFURETE2.Models.Materials> Materials { get; set; }
+
+        public DbSet<IFURETE2.Models.Site> Site { get; set; }
+
+        public DbSet<IFURETE2.Models.Site_Material> Site_Material { get; set; }
+
+        public DbSet<IFURETE2.Models.User_Limit> User_Limit { get; set; }
     }
 }
