@@ -1,7 +1,9 @@
-﻿
+﻿@model IEnumerable<IFURETE4.Models.User>
+
 @{
     ViewData["Title"] = "Felhaszánlók";
 }
+@Html.DisplayNameFor(model => model.username);
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Users">Felhasználók</a></li>
     <li class="breadcrumb-item"><a asp-area="" asp-controller="Admin" asp-action="Sites">Telephelyek</a></li>
@@ -54,14 +56,19 @@
 
                     </div>
                     <div class="col-8" style="width: 30px">
-                        <input type="text" id="name" placeholder="Név" class="form-control" />
-                        <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
-                        <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="text" id="name" placeholder="Név" class="form-control" />
+                            <input type="text" id="emailAddress" placeholder="E-mail cím" class="form-control" />
+                            <input type="text" id="phoneNumber" placeholder="Telefonszám" class="form-control" />
+                            <button type="submit" onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                        </form>
+
                     </div>
                     <fieldset id="checkboxes"></fieldset>
                 </div>
-                <button id="registrationConfrimation" onclick="submit()" class="btn btn-primary">Regisztráció megerősítése</button>
-                <button onclick="submit()" class="btn btn-success">Módosítások mentése</button>
+                <button  id="registrationConfrimation" onclick="submit()" class="btn btn-primary">Regisztráció megerősítése</button>
+                
             </div>
         </div>
     </div>

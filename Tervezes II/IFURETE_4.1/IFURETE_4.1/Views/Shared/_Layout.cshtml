@@ -51,16 +51,12 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
-
-
             <li class="nav-item active">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                     <i class="fas fa-fw fa-building"></i><!-- icon -->
                     <span>Főoldal</span>
                 </a>
             </li>
-
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>
@@ -75,6 +71,47 @@
                     <h6 class="dropdown-header">Other Pages:</h6>
                     <a class="dropdown-item" href="404.html">404 Page</a>
                     <a class="dropdown-item" href="blank.html">Blank Page</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Szerkeszthető</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">
+                        <span>Felhasználók</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Users_Roles" asp-action="Index">
+                        <span>Fe_Sze</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="User_Limit" asp-action="Index">
+                        <span>Fe_Li</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Sites" asp-action="Index">
+                        <span>Telepek</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Site_Material" asp-action="Index">
+                        <span>Te_Any</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Roles" asp-action="Index">
+                        <span>Szerepkörök</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Materials" asp-action="Index">
+                        <span>Anyagok</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Limits" asp-action="Index">
+                        <span>Limitek</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Deliveries" asp-action="Index">
+                        <span>Beszállítások</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Bookings" asp-action="Index">
+                        <span>Foglalások</span>
+                    </a>
+                    <a class="dropdown-item" asp-area="" asp-controller="Booking_Delivery" asp-action="Index">
+                        <span>Fog_Besz</span>
+                    </a>
                 </div>
             </li>
             <li class="nav-item">

@@ -22,8 +22,35 @@ namespace IFURETE_4.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
+            return View(await _context.User.ToListAsync() );
+        }
+        public async Task<IActionResult> DefaultView()
+        {
             return View(await _context.User.ToListAsync());
         }
+
+        [HttpPost]
+        public ActionResult EditUser()
+        {
+            
+            var db = _context;
+            var userID = Request.Form["userID"];
+            var name = Request.Form["name"];
+            var email = Request.Form["email"];
+            var phonenumber = Request.Form["phonenumber"];            
+
+            var result = db.User.SingleOrDefault(item => Convert.ToInt32(item.ID) == Convert.ToInt32(userID));
+            if (result != null)
+            {
+                result.name = name;
+                result.e_mail = email;
+                result.phone_number = phonenumber;
+                db.SaveChanges();
+            }
+
+            return View();           
+        }
+
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)

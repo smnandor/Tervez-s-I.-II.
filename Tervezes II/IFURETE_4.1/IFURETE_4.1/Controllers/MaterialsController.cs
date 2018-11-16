@@ -25,6 +25,43 @@ namespace IFURETE_4.Controllers
             return View(await _context.Material.ToListAsync());
         }
 
+        public async Task<IActionResult> AdminView()
+        {
+            return View(await _context.Material.ToListAsync());
+        }
+
+        [HttpPost]
+        public ActionResult EditMaterial()
+        {
+
+            /*var db = _context;
+            var siteID = Request.Form["siteID"];
+            var sitename = Request.Form["sitename"];
+            var siteaddress = Request.Form["siteaddress"];
+            var contactName = Request.Form["contactName"];
+            var emailAddress = Request.Form["emailAddress"];
+            var phoneNumber = Request.Form["phoneNumber"];
+            var openFrom = Request.Form["openFrom"];
+            var openTo = Request.Form["openTo"];
+            var numberOfTrucks = Request.Form["numberOfTrucks"];
+
+            var result = db.Site.SingleOrDefault(item => Convert.ToInt32(item.ID) == Convert.ToInt32(siteID));
+            if (result != null)
+            {
+                result.Name = sitename;
+                result.Address = siteaddress;
+                result.NameOfContact = contactName;
+                result.EmailAddressOfContact = emailAddress;
+                result.PhonenumberOfContact = phoneNumber;
+                result.OpenFrom = openFrom;
+                result.OpenTo = openTo;
+                result.NumberOfTrucks = numberOfTrucks;
+                db.SaveChanges();
+            }*/
+
+            return View();
+        }
+
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {

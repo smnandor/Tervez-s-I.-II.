@@ -1,60 +1,54 @@
 ﻿@model IFURETE4.Models.User
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Részletek";
 }
 
-<h2>Details</h2>
+<h2>Részletek</h2>
 
 <div>
     <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            Név:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.password)
+            Jelszó:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.password)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.username)
+            Felhasználónév:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.username)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.phone_number)
+            Telefonszám:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.phone_number)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.e_mail)
+            E-mail cím:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.e_mail)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.is_confirmed)
+            Megerősítve:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.is_confirmed)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.is_logged_in)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.is_logged_in)
-        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Szerkeszt</a> |
+    <a asp-action="Index">Vissza a felhasználókhoz</a>
 </div>

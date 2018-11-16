@@ -25,6 +25,43 @@ namespace IFURETE_4.Controllers
             return View(await _context.Role.ToListAsync());
         }
 
+        public async Task<IActionResult> AdminView()
+        {
+            return View(await _context.Role.ToListAsync());
+        }
+
+        [HttpPost]
+        public ActionResult EditRole()
+        {
+            var db = _context;
+            var roleID = Request.Form["roleID"];
+            var name_of_role = Request.Form["rolename"];
+            var material = Request.Form["0"];
+            var sites = Request.Form["1"];
+            var users = Request.Form["2"];
+            var recipient_ui = Request.Form["3"];
+            var supplier_limit = Request.Form["4"];
+            var booking_ui = Request.Form["5"];
+            var report_ui = Request.Form["6"];
+            var EAKER_ui = Request.Form["7"];
+
+            var result = db.Role.SingleOrDefault(item => Convert.ToInt32(item.ID) == Convert.ToInt32(roleID));
+            if (result != null)
+            {
+                result.material = Convert.ToInt32(material);
+                result.sites = Convert.ToInt32(sites);
+                result.users = Convert.ToInt32(users);
+                result.recipient_ui = Convert.ToInt32(recipient_ui);
+                result.supplier_limit = Convert.ToInt32(supplier_limit);
+                result.booking_ui = Convert.ToInt32(booking_ui);
+                result.report_ui = Convert.ToInt32(report_ui);
+                result.EAKER_ui = Convert.ToInt32(EAKER_ui);
+                db.SaveChanges();
+            }
+
+            return View();
+        }
+
         // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
