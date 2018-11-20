@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IFURETE4.Models;
 using IFURETE_4.Models;
+using System.Data.SqlClient;
+using System.Data;
+using System.Globalization;
+
 
 namespace IFURETE_4.Controllers
 {
@@ -24,6 +28,51 @@ namespace IFURETE_4.Controllers
         {
             return View(await _context.Booking.ToListAsync());
         }
+
+
+        [HttpPost]
+        public ActionResult Report()
+        {
+
+            var picked_date = Request.Form["myDate"];
+            var Date = DateTime.Parse(picked_date).Date.ToString("yyyyMMdd");
+
+
+            ViewData["ClickedDate"] = picked_date;
+
+            string query = " SELECT * " +
+                           " FROM Booking " +
+                           " WHERE date = \'" + Date + "\' AND NOT EXISTS ( SELECT * FROM User_Limit where User_Limit.limit_id = Booking.ID) ";
+
+
+            return View(_context.Booking.FromSql(query).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult BookTheAppointment()
+        {
+            var picked_appointment = Request.Form["myAppointment"];
+
+            
+
+            var db = _context;
+            db.User_Limit.Add(new User_Limit
+            {
+                user_id = 1,
+                limit_id = Convert.ToInt32(picked_appointment)
+            });
+            db.SaveChanges();
+
+            
+
+            string query = "SELECT * " +
+                           "FROM Booking " +
+                           "WHERE ID = " + picked_appointment;
+
+
+            return View(_context.Booking.FromSql(query).ToList());
+        }
+
 
         // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int? id)

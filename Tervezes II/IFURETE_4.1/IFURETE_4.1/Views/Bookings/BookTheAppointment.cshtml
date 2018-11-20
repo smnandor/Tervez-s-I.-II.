@@ -1,0 +1,37 @@
+﻿
+
+@model IEnumerable<IFURETE4.Models.Booking>
+
+@{
+    ViewData["Title"] = "BookTheAppointment";
+}
+
+<h2>
+    A foglalás részletei:
+</h2>
+<hr />
+
+
+
+<table class="table">
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <p>
+                        <strong>Beszállítás időpontja: </strong>
+                        @Html.DisplayFor(modelItem => item.date)
+                        @Html.DisplayFor(modelItem => item.time_start) -
+                        @Html.DisplayFor(modelItem => item.time_end)
+                    </p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p><a href="Index">Vissza a foglalásokhoz</a></p>
+

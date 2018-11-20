@@ -1,0 +1,83 @@
+﻿
+@model IEnumerable<IFURETE4.Models.Booking>
+
+
+
+@{
+    ViewData["Title"] = "Időpontfoglalás";
+}
+
+<div class="card">
+    <div class="card-header">
+        Időpontfoglalás
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <h2>@ViewData["Időpontfoglalás"]</h2>
+
+            <br />
+            <form method="post" action="/Bookings/Report" id="DateForm">
+                <input name="myDate" type="date" id="Date" />
+            </form>
+            <script>
+                document.getElementById("Date").addEventListener("change", function ()
+                {
+                    document.getElementById("DateForm").submit();
+                });
+            </script>
+            <br />
+            <strong>
+                Ezen a napon elérhető foglalások: ( @ViewData["ClickedDate"])
+            </strong>
+
+            <hr />
+            <table class="table table-bordered" style="width:65%">
+                <thead>
+                    <tr>
+                        <th>
+                            Foglalás
+                        </th>
+                        <th>
+                            Elérhető időpontok ezen a napon
+                        </th>
+                        <th>
+                            Súly (t)
+                        </th>
+                        <th>
+                            <center>
+                                Kamionok száma
+                            </center>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <form method="post" action="/Bookings/BookTheAppointment" id="AppointmentForm">
+                                    <button name="myAppointment" type="submit" id="Appointment" value="@item.ID" class="btn btn-success"> Lefoglalom </button>
+                                </form>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.date) <br />
+
+                                @Html.DisplayFor(modelItem => item.time_start) -
+
+                                @Html.DisplayFor(modelItem => item.time_end)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.weight) (t)
+                            </td>
+                            <td>
+                                <center>
+                                    @Html.DisplayFor(modelItem => item.number_of_trucks)
+                                </center>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

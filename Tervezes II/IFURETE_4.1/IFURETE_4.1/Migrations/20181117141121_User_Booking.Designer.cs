@@ -4,14 +4,16 @@ using IFURETE_4.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IFURETE_4.Migrations
 {
     [DbContext(typeof(IFURETE_4Context))]
-    partial class IFURETE_4ContextModelSnapshot : ModelSnapshot
+    [Migration("20181117141121_User_Booking")]
+    partial class User_Booking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -187,6 +187,20 @@ namespace IFURETE_4.Migrations
                 {
                     table.PrimaryKey("PK_Users_Roles", x => x.ID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "User_Booking",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    user_id = table.Column<int>(nullable: false),
+                    booking_id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User_Booking", x => x.ID);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -223,6 +237,9 @@ namespace IFURETE_4.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users_Roles");
+
+            migrationBuilder.DropTable(
+                name: "User_Booking");
         }
     }
 }

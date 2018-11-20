@@ -6,6 +6,29 @@
 
 <h2>Index</h2>
 
+
+
+@{
+    ViewData["Title"] = "Időpontfoglalás";
+}
+<h2>@ViewData["Title"]</h2>
+<br />
+<form method="post" action="/Bookings/Report" id="DateForm">
+    <input name="myDate" type="date" id="Date" />
+</form>
+
+<script>
+    document.getElementById("Date").addEventListener("change", function () {
+        document.getElementById("DateForm").submit();
+    });
+</script>
+
+
+
+
+
+@ViewData["ClickedAppointment"]
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
