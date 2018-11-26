@@ -1,0 +1,11 @@
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\bin\Release\netcoreapp2.0\IFURETE_4.deps.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\bin\Release\netcoreapp2.0\IFURETE_4.runtimeconfig.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\bin\Release\netcoreapp2.0\IFURETE_4.runtimeconfig.dev.json
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\bin\Release\netcoreapp2.0\IFURETE_4.dll
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\bin\Release\netcoreapp2.0\IFURETE_4.pdb
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.csprojResolveAssemblyReference.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.csproj.CoreCompileInputs.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.AssemblyInfoInputs.cache
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.AssemblyInfo.cs
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.dll
+C:\Users\smura\Desktop\Szakdolgozat\Tervez-s-I.-II\Tervezes II\IFURETE_4.1\IFURETE_4.1\obj\Release\netcoreapp2.0\IFURETE_4.pdb
