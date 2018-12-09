@@ -1,66 +1,56 @@
 ﻿@model IFURETE4.Models.User
-
 @{
-    ViewData["Title"] = "Új felhasználó";
+    ViewData["Title"] = "Regisztráció";
 }
 
-<h2>Új felhaszánló léterhozása</h2>
+<div class="card">
+    <div class="card-header">
+        Regisztráció
+    </div>
+    <div class="card-body">
+        <div class="container">
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="name" class="control-label">Név</label>
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="password" class="control-label">Jelszó</label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="username" class="control-label">Felhasználónév</label>
-                <input asp-for="username" class="form-control" />
-                <span asp-validation-for="username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="phone_number" class="control-label">Telefonszám</label>
-                <input asp-for="phone_number" class="form-control" />
-                <span asp-validation-for="phone_number" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="e_mail" class="control-label">E-mail cím</label>
-                <input asp-for="e_mail" class="form-control" />
-                <span asp-validation-for="e_mail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="is_confirmed" /> Regisztráció megerősítve
-                    </label>
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="name" class="control-label">Név</label>
+                            <input asp-for="name" class="form-control" />
+                            <span asp-validation-for="name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="password" class="control-label">Jelszó</label>
+                            <input asp-for="password" class="form-control" type="password" />
+                            <span asp-validation-for="password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="username" class="control-label">Felhasználónév</label>
+                            <input asp-for="username" class="form-control" />
+                            <span asp-validation-for="username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="phone_number" class="control-label">Telefonszám</label>
+                            <input asp-for="phone_number" class="form-control" />
+                            <span asp-validation-for="phone_number" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="e_mail" class="control-label">E-mail cím</label>
+                            <input asp-for="e_mail" class="form-control" />
+                            <span asp-validation-for="e_mail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Regisztráció" class="btn btn-default" />
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="is_logged_in" /> Bejelentkezve
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Létrehoz" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
 <div>
-    <a asp-action="Index">Vissza a felhasználókhoz</a>
+    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Vissza a főoldalra</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

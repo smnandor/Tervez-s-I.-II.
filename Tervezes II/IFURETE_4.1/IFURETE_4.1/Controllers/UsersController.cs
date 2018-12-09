@@ -28,6 +28,30 @@ namespace IFURETE_4.Controllers
         {
             return View(await _context.User.ToListAsync());
         }
+        
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Confirmation()
+        {
+            var username = Request.Form["username"];
+            var password = Request.Form["password"];
+            var db = _context;
+            var result = db.User.SingleOrDefault(item => item.username == username);
+            if (result != null)
+            {
+                if (result.password == password)
+                {
+                    result.is_logged_in = true;
+                    db.SaveChanges();
+                }
+            }
+            return View();
+        }
 
         [HttpPost]
         public ActionResult EditUser()

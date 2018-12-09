@@ -2,12 +2,12 @@
 @{
     ViewData["Title"] = "Telephelyek";
 }
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-area="" asp-controller="Users" asp-action="Index">Felhasználók</a></li>
-    <li class="breadcrumb-item"><a asp-area="" asp-controller="Sites" asp-action="AdminView">Telephelyek</a></li>
-    <li class="breadcrumb-item"><a asp-area="" asp-controller="Materials" asp-action="AdminView">Anyagok</a></li>
-    <li class="breadcrumb-item"><a asp-area="" asp-controller="Roles" asp-action="AdminView">Szerepkörök</a></li>
-</ol>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Felhasználók</a>
+    <a class="nav-link" asp-area="" asp-controller="Sites" asp-action="AdminView">Telephelyek</a>
+    <a class="nav-link" asp-area="" asp-controller="Materials" asp-action="AdminView">Anyagok</a>
+    <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="AdminView">Szerepkörök</a>
+</nav>
 
 <div class="card">
     <div class="card-header">
@@ -334,4 +334,9 @@
         height: 50px;
         float: right;
     }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+
 </style>

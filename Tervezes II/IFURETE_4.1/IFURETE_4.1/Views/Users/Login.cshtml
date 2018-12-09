@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Bejelentkezés";
+}
+<div class="card">
+    <div class="card-header">
+        Bejelentkezés
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form method="post" action="/Users/Confirmation" id="EditForm">
+                <input type="text" name="username" placeholder="Felhasználónév" id="username"><br />
+                <input type="password" name="password" id="password" placeholder="Jelszó" /><br />
+                <button type="submit" onclick="submit()" class="btn btn-success">Bejelentkezés</button>
+            </form>
+        @ViewData["successfulness"]
+        </div>
+    </div>
+</div>
+
+<style>
+   input {
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 10px; /* Add some space below the input */
+        margin-top: 10px;
+    }
+</style>
